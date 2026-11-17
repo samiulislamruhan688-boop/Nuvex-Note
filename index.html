@@ -181,6 +181,23 @@ input[type=range]{padding:0;border:0;background:none;accent-color:var(--a2)}
 .fb{overflow:hidden}.fb:not(.cvb):not(.cam){position:relative}.fb input,.fov{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0}.drop{position:relative}
 .cam{position:absolute;right:2px;bottom:2px;width:36px;height:36px;border-radius:50%;background:var(--a1);color:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid var(--bg);cursor:pointer}.cam svg{pointer-events:none}.cover .cam{right:14px;bottom:14px;width:40px;height:40px}.ring{position:relative}
 .ov.cf{z-index:70}
+.ki{padding:0}.ki svg{width:26px;height:26px;display:block}.ki.em{font-size:24px;letter-spacing:0;font-weight:400;line-height:1}
+.dh{flex:none;background:none;border:0;color:var(--mut);padding:10px 4px;margin:0 -4px 0 0;cursor:grab;touch-action:none;border-radius:10px;display:grid;place-items:center;-webkit-tap-highlight-color:transparent}
+.dh:hover,.dh:focus-visible{background:var(--c2);color:var(--ink)}
+.row.dragging{position:relative;z-index:30;box-shadow:0 14px 34px rgba(0,0,0,.3);cursor:grabbing;transition:none;border-color:var(--a2)}
+body.dragging-r{user-select:none;-webkit-user-select:none;cursor:grabbing}
+.icf{display:flex;align-items:center;gap:12px;margin:10px 0 4px}.icf .icm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.icb{background:none;border:0;padding:0;cursor:pointer;border-radius:12px;flex:none}
+.edm .icf{margin:0;grid-column:1/-1}
+.icbox{max-width:620px}.icfoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line)}
+.icsw{display:flex;gap:6px;flex:1;flex-wrap:wrap;min-width:140px}.sw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;box-shadow:0 0 0 1px var(--line)}.sw.on{border-color:var(--ink)}
+.icg{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px;margin-top:8px}
+.icg button{aspect-ratio:1;border:2px solid transparent;background:#f3f4f2;border-radius:10px;display:grid;place-items:center;padding:6px;cursor:pointer}.icg button.on{border-color:var(--a2)}
+.icg img{width:28px;height:28px}.icg .emo{font-size:26px;line-height:1}.icg .sv{color:#222;display:block;width:30px;height:30px}.icg .sv svg{width:100%;height:100%}
+.icsets{margin-top:6px;gap:6px}
+.icsets{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.icsets::-webkit-scrollbar{display:none}.icsets .chip{flex:none}
+.icbox .cnt{min-height:260px}
+
 .sheet{max-width:var(--nw,780px)}.sheet .doc{font-family:var(--nff,inherit);line-height:var(--nlh,1.85)}
 html[data-paper="ruled"] .sheet{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--nlh,1.85)*var(--nfs,17px) - 1px),rgba(120,130,150,.25) calc(var(--nlh,1.85)*var(--nfs,17px)));background-position:0 30px}
 html[data-paper="dotted"] .sheet{background-image:radial-gradient(rgba(120,130,150,.4) 1px,transparent 1.3px);background-size:22px 22px}
@@ -574,7 +591,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=b=>b>=1073741824?(b/1073741824).toFixed(2)+" GB":b>=1048576?(b/1048576).toFixed(1)+" MB":Math.max(1,Math.round(b/1024))+" KB";
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-const DEF={theme:"system",accent:"emerald",lang:"en",intro:true,introSound:true,introVolume:16,motion:true,fs:17,sort:"new",aiLang:"auto",aiDetail:"normal",paper:"plain",nfont:"sans",lh:1.85,width:"normal",tapMark:true,cdel:true,aiSave:true,density:"comfortable",goal:30,focusMin:25,exam:"",hc:{},uc:{},rtone:"white",rweight:"400",rls:"0",rps:"1",ralign:"left",rruler:false,rwarm:0,rdim:0,rscroll:0,awake:false,aiLib:true,aiFollow:true,pin:"",lock:"5",lastBackup:0,tbo:null,tbh:[],tbSize:"m",tbColor:"",tbLabels:true,asPreset:"normal",asCustom:60,smart:true,vauto:true,tomb:{},raLang:"auto",raBn:"",raEn:"",raRate:1,raScroll:true,raHl:true,vzSize:"auto",vzAlign:"center",vzSide:"stack",vzIcons:true,vzIconSz:"m",vzIconSt:"tile"};
+const DEF={theme:"system",accent:"emerald",lang:"en",intro:true,introSound:true,introVolume:16,motion:true,fs:17,sort:"new",aiLang:"auto",aiDetail:"normal",paper:"plain",nfont:"sans",lh:1.85,width:"normal",tapMark:true,cdel:true,aiSave:true,density:"comfortable",goal:30,focusMin:25,exam:"",hc:{},uc:{},rtone:"white",rweight:"400",rls:"0",rps:"1",ralign:"left",rruler:false,rwarm:0,rdim:0,rscroll:0,awake:false,aiLib:true,aiFollow:true,pin:"",lock:"5",lastBackup:0,tbo:null,tbh:[],tbSize:"m",tbColor:"",tbLabels:true,asPreset:"normal",asCustom:60,smart:true,autofmt:true,vauto:true,tomb:{},raLang:"auto",raBn:"",raEn:"",raRate:1,raScroll:true,raHl:true,vzSize:"auto",vzAlign:"center",vzSide:"stack",vzIcons:true,vzIconSz:"m",vzIconSt:"tile"};
 const NF={sans:"inherit",serif:'Georgia,"Noto Serif Bengali","Times New Roman",serif',mono:'ui-monospace,Menlo,Consolas,monospace',hyper:'"Atkinson Hyperlegible",Inter,"Hind Siliguri",sans-serif',round:'"Hind Siliguri",Inter,sans-serif',
  solaiman:'SolaimanLipi,"Hind Siliguri","Noto Sans Bengali",Inter,sans-serif',notosb:'"Noto Sans Bengali",Inter,sans-serif',notoserifb:'"Noto Serif Bengali",Georgia,serif',tiro:'"Tiro Bangla","Noto Serif Bengali",Georgia,serif',anek:'"Anek Bangla","Noto Sans Bengali",Inter,sans-serif',mukta:'Mukta,"Noto Sans Bengali",sans-serif',
  inter:'Inter,"Noto Sans Bengali","Hind Siliguri",sans-serif',roboto:'Roboto,"Noto Sans Bengali","Hind Siliguri",sans-serif',opensans:'"Open Sans","Noto Sans Bengali","Hind Siliguri",sans-serif',lora:'Lora,"Noto Serif Bengali",Georgia,serif',merri:'Merriweather,"Noto Serif Bengali",Georgia,serif'};
@@ -970,8 +987,149 @@ async function nxVisPractice(){const T="ভিজ্যুয়াল অনু
  catch(e){return toast("Couldn’t add the practice note: "+((e&&e.message)||"error"))}
  try{closeM()}catch(e){}await openItem(it.id);setTimeout(()=>nxqOpen(it.id),500)}
 
+/* ===== Nuvex rich blocks: ```answer, ```concept, ```flow, ```definition, ```note ===== */
+function nxBn(h){return h.replace(/([\u0980-\u09FF\u200c\u200d][\u0980-\u09FF\u200c\u200d ,।.;:!?’'"“”()\-]*[\u0980-\u09FF\u200c\u200d])|[\u0980-\u09FF\u200c\u200d]/g,'<span class="bn" lang="bn">$&</span>')}
+function nxStep(x){x=String(x==null?"":x);if(/[$\\*`]/.test(x))return md(x,{smart:false,auto:false}).replace(/^<p>([\s\S]*)<\/p>$/,"$1");return nxBn(esc(x))}
+function nxKindBox(cb,cls,def){const label=String(cb.r||"").replace(/^\S+\s*/,"").trim().slice(0,60)||def;return '<div class="'+cls+'"><div class="nxah">'+nxBn(esc(label))+'</div><div class="nxab">'+md(String(cb.c||"").replace(/\n+$/,""),{smart:false,auto:false})+'</div></div>'}
+function nxAnsBox(cb){return nxKindBox(cb,"nxans","Answer")}
+function nxConcept(src){const rows=String(src||"").split("\n").map(x=>x.trim().replace(/^[#>\-*\u2022]+\s*/,"")).filter(x=>x&&!/^[\u2192\u2193\u2191\-\s]+$/.test(x)).slice(0,10).map(r=>r.split("|").map(x=>x.trim()).filter(Boolean).slice(0,6)).filter(r=>r.length);
+ if(!rows.length)return"";let h='<div class="nxcp">';
+ rows.forEach((r,i)=>{if(i)h+='<div class="nxcar" aria-hidden="true">\u2193</div>';
+  if(r.length===1)h+='<div class="nxcb p">'+nxStep(r[0].slice(0,120))+'</div>';
+  else h+='<div class="nxcg">'+r.map(x=>'<div class="nxcb">'+nxStep(x.slice(0,80))+'</div>').join("")+'</div>'});
+ return h+'</div>'}
+function nxFlowH(title,steps){steps=(steps||[]).slice(0,12);if(!steps.length)return"";return '<div class="nxcp nxfl">'+(title?'<div class="nxfh">'+nxStep(title)+'</div>':"")+steps.map((x,i)=>(i?'<div class="nxcar" aria-hidden="true">\u2193</div>':"")+'<div class="nxcb">'+nxStep(x)+'</div>').join("")+'</div>'}
+function nxClsH(items){items=(items||[]).slice(0,12);if(!items.length)return"";return '<div class="nxcp nxcl"><div class="nxcg">'+items.map(x=>'<div class="nxcb">'+nxStep(x)+'</div>').join("")+'</div></div>'}
+function nxUrl(u){u=String(u||"").trim().replace(/^<|>$/g,"").split(/\s+/)[0]||"";return/^(https?:\/\/|data:image\/)/i.test(u)?u:""}
+function nxMediaParse(src){const items=[];let c=null;String(src||"").split("\n").forEach(l=>{const t=l.trim(),m=t.match(/^!\[([^\]]*)\]\(([^)]*)\)$/);if(m){c={cap:m[1],src:nxUrl(m[2]),lines:[]};items.push(c)}else if(c&&!/^([-*_])\1{2,}$/.test(t))c.lines.push(l)});
+ items.forEach(x=>{while(x.lines.length&&!x.lines[x.lines.length-1].trim())x.lines.pop();while(x.lines.length&&!x.lines[0].trim())x.lines.shift()});return items.slice(0,24)}
+function nxMediaH(src){const items=nxMediaParse(src);if(!items.length)return"";
+ return '<div class="nxmd">'+items.map(it=>{const ls=it.lines.slice();let title="";
+  if(ls.length){const f0=ls[0].trim(),f=f0.replace(/^#{1,6}\s+/,""),isHead=/^#{1,6}\s/.test(f0),isBold=/^\*\*[^*]+\*\*:?$/.test(f)||/^(?:\d+|[০-৯]+)[.)।]\s/.test(f);
+   if(isHead||isBold||(f.length<=80&&!/[.।!?:]$/.test(f)&&ls.length>1)){title=f;ls.shift()}}
+  const body=ls.length?md(ls.join("\n"),{smart:false,auto:false}):"";
+  return '<div class="nxmr"><div class="nxi" data-cap="'+esc(it.cap)+'"'+(it.src?' data-src="'+esc(it.src)+'"':"")+'><small class="meta">'+esc(it.cap)+'</small></div><div class="nxmb">'+(title?'<div class="nxmt">'+nxStep(title)+'</div>':"")+body+'</div></div>'}).join("")+'</div>'}
+function nxJ(c){try{const d=JSON.parse(c);return d&&typeof d==="object"?d:{}}catch(e){return{}}}
+const NXB={media:cb=>nxMediaH(cb.c),answer:nxAnsBox,concept:cb=>nxConcept(cb.c),
+ definition:cb=>nxKindBox(cb,"nxdef","Definition"),nxdef:cb=>nxKindBox(cb,"nxdef","Definition"),
+ note:cb=>nxKindBox(cb,"nxnote","Note"),nxnote:cb=>nxKindBox(cb,"nxnote","Note"),
+ flow:cb=>nxFlowH("",String(cb.c||"").split("\n").map(x=>x.trim().replace(/^(?:[-*\u2022]|\d+[.)])\s+/,"")).filter(x=>x&&!/^[\u2192\u2193\u2191\-\s]+$/.test(x))),
+ nxflow:cb=>{const d=nxJ(cb.c);return nxFlowH(d.t,d.s)},nxcls:cb=>nxClsH(nxJ(cb.c).s)};
+
+/* ===== Nuvex auto-structure engine =====
+   Local and deterministic: no network, no AI call. It runs at render time on a copy of the note text,
+   so saved notes are never modified. Every candidate gets a confidence score (0-100); only scores
+   >= NXA_MIN are turned into a visual block, everything else stays exactly as written.
+   Manual ```answer / ```concept / ```flow ... blocks are already placeholders at this point and are never touched. */
+const NXA_MIN=70,NXA_MAXL=5000,NXA_CACHE=new Map();
+const NXA_ANS=/^(?:[*_]{1,3}\s*)?(সঠিক উত্তর|প্রশ্নের উত্তর|গুরুত্বপূর্ণ উত্তর|উত্তর|correct answer|answer|ans)(?:\s*[*_]{1,3})?\s*([:：.])\s*(?:[*_]{1,3})?\s*(.*)$/i;
+const NXA_DEF=/^(?:[*_]{1,3}\s*)?(সংজ্ঞা|definition)(?:\s*[*_]{1,3})?\s*[:：]\s*(?:[*_]{1,3})?\s*(.*)$/i;
+const NXA_NOTE=/^(?:[*_]{1,3}\s*)?(important|note|key point|key idea|remember|tip|caution|warning|মনে রাখো|মনে রাখবে|মনে রাখবেন|গুরুত্বপূর্ণ|লক্ষ্য করো|লক্ষ্য কর|সতর্কতা|বিশেষ দ্রষ্টব্য|দ্রষ্টব্য)(?:\s*[*_]{1,3})?\s*[:：]\s*(?:[*_]{1,3})?\s*(.*)$/i;
+const NXA_QLAB=/^(?:[*_]{1,3}\s*)?(প্রশ্ন|question|q)\s*[\d০-৯]*\s*(?:[*_]{1,3})?\s*[:：.)]\s*(?:[*_]{1,3})?\s*(.*)$/i;
+const NXA_IMP=/(?:ব্যাখ্যা|বর্ণনা|আলোচনা|বিশ্লেষণ|সংজ্ঞা)\s*(?:করো|কর|দাও|দিন|করুন)[।.]?$/;
+const NXA_PROC=/(?:\bprocess\b|\bsteps?\b|\bstages?\b|\bprocedure\b|\bcycle\b|\bsequence\b|\bphases?\b|\bmechanism\b|\bhow\b|ধাপ|প্রক্রিয়া|পদ্ধতি|চক্র|পর্যায়|ক্রম|কীভাবে|কিভাবে|কার্যপ্রণালি)/i;
+const NXA_CONN=/(?:\b(?:then|next|after|finally|subsequently|followed by|first|lastly|afterwards)\b|এরপর|তারপর|অতঃপর|অবশেষে|পরবর্তী|প্রথমে|সবশেষে|শেষে|ফলস্বরূপ|ফলে)/i;
+const NXA_CLS=/(?:\btypes?\b|\bkinds?\b|\bclassification\b|\bcategories\b|\bclasses\b|\bcomponents\b|\bparts?\b|\bbranches\b|প্রকারভেদ|প্রকার|শ্রেণিবিভাগ|শ্রেণীবিভাগ|উপাদান|শাখা)/i;
+const NXA_ARR=/\s*(?:→|⟶|➔|➜|➝|⇒|=>|->|>>)\s*/;
+const NXA_ARRL=/^[↓⬇⇓▼↧⇩→⟶➔➜│]+$/;
+const NXA_STEP=/^(?:\*\*)?(?:step|ধাপ|stage|পর্যায়)\s*([\d০-৯]+)\s*(?:\*\*)?\s*[:：.)\-–]/i;
+const nxaNo=x=>{const q=String(x).match(NXA_STEP);return q?+String(q[1]).replace(/[০-৯]/g,d=>"০১২৩৪৫৬৭৮৯".indexOf(d)):0};
+const NXA_LM=/^(?:[-*•]|\d+[.)]|[০-৯]+[.।)])\s+/;
+const NXA_NUM=/^(?:\d+|[০-৯]+)[.)।]/;
+const NXA_STOP=new Set(["what","why","how","the","and","are","for","with","that","this","from","does","did","define","explain","describe","write","about","কী","কি","কেন","কীভাবে","কাকে","বলে","করো","কর","লেখো","দাও","ব্যাখ্যা","বর্ণনা","আলোচনা"]);
+const nxaWords=s=>String(s).split(/\s+/).filter(Boolean).length;
+const nxaUnb=t=>String(t).replace(/^(\*\*|__)(.+)\1$/,"$2");
+const nxaCap=l=>/^ans$/i.test(l)?"Answer":l.charAt(0).toUpperCase()+l.slice(1);
+function nxaKind(t){if(!t)return"blank";if(/^\u0003\d+\u0004$/.test(t))return"block";if(/^#{1,6}\s/.test(t))return"head";if(t[0]==="|")return"table";if(t[0]===">")return"quote";if(/^!\[/.test(t))return"img";if(/^([-*_])\1{2,}$/.test(t))return"hr";if(NXA_LM.test(t))return"list";return"text"}
+function nxaToks(s){return(String(s).toLowerCase().match(/[a-z]{3,}|[\u0980-\u09FF]{3,}/g)||[]).filter(w=>!NXA_STOP.has(w)).map(w=>w.slice(0,5))}
+function nxaOver(a,b){const A=nxaToks(a);if(!A.length)return false;const B=new Set(nxaToks(b));return A.some(w=>B.has(w))}
+function nxaQ(raw){let t=String(raw).trim(),num=false,lab=false,m;if(m=t.match(/^(?:\d+|[০-৯]+)[.)।]\s+(.*)$/)){t=m[1];num=true}
+ if((m=t.match(NXA_QLAB))&&m[2]){lab=true;t=m[2]}
+ const core=t.replace(/^[*_]{1,3}\s*/,"").replace(/[\s*_)\]"”’']+$/,"");if(core.length<3||core.length>220)return null;
+ const mark=/[?？]$/.test(core),imp=!mark&&(NXA_IMP.test(core)||(/^(explain|describe|define|discuss|state|differentiate|distinguish)\b/i.test(core)&&core.length<=140));
+ return(mark||lab||imp)?{t:core,mark,lab,imp,num}:null}
+function nxaChain(t){if(/[$\\`\u0001\u0003]/.test(t))return null;if(typeof chemLine==="function"&&chemLine(t))return null;
+ let title="",body=t,m=t.match(/^([^→⟶➔➜➝⇒>=\-]{2,60}?)\s*[:：]\s+(.+)$/);if(m&&NXA_ARR.test(m[2])){title=nxaUnb(m[1].trim());body=m[2]}
+ const seg=body.split(NXA_ARR).map(x=>nxaUnb(x.trim())).filter(Boolean);if(seg.length<3||seg.length>10)return null;
+ for(const x of seg){if(x.length>75||nxaWords(x)>10||(/[.।]$/.test(x)&&nxaWords(x)>8))return null}
+ return{t:title,s:seg}}
+function nxaDef(p,ctx){if(p.length>400||p.length<20)return 0;let c=0;
+ if(/^\*\*([^*]{2,60})\*\*\s*(?:\([^)]{0,60}\)\s*)?(?:হলো|হল|হচ্ছে|is|are|refers to|means|কে বলা হয়|কে বলে|বলতে)(?=[\s,।.:]|$)/.test(p))c=80;
+ if(!c&&/^(?:[Aa]n?|[Tt]he)?\s*[A-Z][\w\- ]{1,50}?\s(?:is|are)\s(?:defined as|called|known as|termed|referred to as)\s/.test(p))c=80;
+ if(!c&&/বলতে\s.{6,}(?:বোঝায়|বুঝায়|বোঝানো হয়|বুঝানো হয়)/.test(p))c=80;
+ if(!c&&/^(?:যে|যেসব|যা|যার|যাকে|যখন|যেখানে|যেগুলো)\s.{8,}\s(?:বলে|বলা হয়)[।.]?$/.test(p))c=75;
+ if(!c){const m=p.match(/^\*{0,2}([^\s,।:*]+(?:\s+[^\s,।:*]+){0,3})\*{0,2}\s+(?:হলো|হল|হচ্ছে|is|are)\s/);if(m){c=50;if(ctx&&nxaOver(m[1],ctx))c+=25}}
+ return c}
+function nxaRun(L){const n=L.length,K=new Array(n),TT=i=>(i>=0&&i<n?L[i].trim():"");
+ {let on=false;for(let i=0;i<n;i++){const t=L[i].trim();let k=nxaKind(t);const c=(t.match(/\$\$/g)||[]).length;
+   if(on){k="math";if(c%2===1||/\\\]|\\end\{/.test(t))on=false}
+   else if(c%2===1||/^\\\[(?![\s\S]*\\\])/.test(t)||/\\begin\{[A-Za-z*]+\}(?![\s\S]*\\end\{)/.test(t)){k="math";on=true}
+   K[i]=k}}
+ const isLab=t=>NXA_ANS.test(t)||NXA_DEF.test(t)||NXA_NOTE.test(t)||LAB.test(t);
+ const prevNB=i=>{let j=i-1,g=0;while(j>=0&&K[j]==="blank"&&g<2){j--;g++}return j};
+ const pr=j=>{try{return peekRun(L,j)}catch(e){return null}};
+ const gather=(i,first)=>{const lines=[];if(first&&first.trim())lines.push(first);let j=i+1;while(j<n&&j-i<14){const k=K[j];if(k!=="text"&&k!=="list"&&k!=="table")break;const t=TT(j);if(k==="text"&&(isLab(t)||nxaQ(t)))break;lines.push(L[j]);j++}return{lines,end:j}};
+ const para=(j,max)=>{const pl=[];while(j<n&&pl.length<max&&K[j]==="text"&&!isLab(TT(j))&&!nxaQ(TT(j))){pl.push(L[j]);j++}return{pl,end:j}};
+ const listEval=i=>{const items=[],ord=NXA_NUM.test(TT(i));let j=i,ind0=null,bad=false;
+  while(j<n){const kk=K[j];if(kk==="list"){const ind=L[j].match(/^\s*/)[0].length;if(ind0===null)ind0=ind;else if(Math.abs(ind-ind0)>=2)bad=true;items.push(TT(j).replace(NXA_LM,"").trim());j++}
+   else if(kk==="blank"&&ord&&j+1<n&&K[j+1]==="list"&&NXA_NUM.test(TT(j+1)))j++;else break}
+  if(bad||items.length<3||items.length>8||items.some(x=>!x||/[\u0003\u0001]/.test(x)))return null;
+  if(items.filter(x=>/[?？]$/.test(x)).length>=items.length/2)return null;
+  let p=i-1,g=0;while(p>=0&&K[p]==="blank"&&g<1){p--;g++}
+  const lt=(p>=0&&(K[p]==="text"||K[p]==="head"))?nxaUnb(TT(p).replace(/^#{1,6}\s+/,"")).replace(/[:：\s*]+$/,""):"",isHead=p>=0&&K[p]==="head",colon=p>=0&&/[:：]\s*(?:\*\*)?$/.test(TT(p));
+  const maxLen=Math.max(...items.map(x=>x.length)),maxW=Math.max(...items.map(nxaWords));let best=null;
+  const cue=NXA_PROC.test(lt),stepW=items.filter(x=>/^(?:step|ধাপ|stage|পর্যায়|phase)\s*[\d০-৯]/i.test(x)).length>=items.length*.5,conn=items.filter(x=>NXA_CONN.test(x)).length>=Math.ceil(items.length*.5);
+  let f=20+(ord?20:0)+(cue?40:0)+(stepW?30:0)+(conn?20:0);if(maxLen>140||maxW>20)f-=50;
+  if(f>=NXA_MIN)best={c:f,s:i,e:j,b:{l:"nxflow",c:JSON.stringify({s:items})}};
+  if(NXA_CLS.test(lt)&&lt.length<=90&&items.every(x=>x.length<=60&&nxaWords(x)<=8&&!/[.।]$/.test(x))){const c=75+(isHead||colon?10:0);if(c>=NXA_MIN&&(!best||c>best.c))best={c,s:i,e:j,b:{l:"nxcls",c:JSON.stringify({s:items})}}}
+  return best};
+ const blocks=[],out=[];let i=0;
+ while(i<n){const k=K[i],t=TT(i);let best=null,m;const cand=(c,s,e,b)=>{if(c>=NXA_MIN&&(!best||c>best.c))best={c,s,e,b}};
+  if(k==="img"&&/^!\[[^\]]*\]\([^)]*\)$/.test(t)){const IM=/^!\[[^\]]*\]\([^)]*\)$/,items=[];let j=i,end=i;
+   while(j<n&&K[j]==="img"&&IM.test(TT(j))){const lines=[TT(j)];let q=j+1;
+    while(q<n&&(K[q]==="text"||K[q]==="list"||(K[q]==="head"&&lines.length===1))&&lines.length<9&&!/\u0003/.test(L[q])){lines.push(L[q]);q++}
+    const txt=lines.slice(1).join(" ");if(lines.length<2||txt.length>600||!(lines.length>=3||txt.length>=60))break;
+    items.push(lines);end=q;let r=q,b=0;while(r<n&&(K[r]==="blank"||K[r]==="hr")&&b<3){r++;b++}
+    if(r<n&&K[r]==="img"&&IM.test(TT(r))){j=r;continue}break}
+   if(items.length>=2)cand(85,i,end,{l:"media",c:items.map(x=>x.join("\n")).join("\n\n")})}
+  if(k==="text"){
+   if((m=t.match(NXA_ANS))&&(m[2]!==".")||(m&&/^ans$/i.test(m[1]))){const p=prevNB(i),mcq=p>=0&&OPTR.test(TT(p)),single=/^\(?[A-Da-dক-ঘ]\)?[.)]?$/.test((m[3]||"").trim());
+    if(!mcq&&!single){const g=gather(i,m[3]);if(g.lines.join("").trim())cand(95,i,g.end,{l:"answer",r:"answer "+nxaCap(m[1].trim()),c:g.lines.join("\n")})}}
+   if(m=t.match(NXA_DEF)){const g=gather(i,m[2]);if(g.lines.join("").trim())cand(95,i,g.end,{l:"nxdef",r:"nxdef "+nxaCap(m[1].trim()),c:g.lines.join("\n")})}
+   if(m=t.match(NXA_NOTE)){const g=gather(i,m[2]);if(g.lines.join("").trim()&&g.lines.length<=8)cand(92,i,g.end,{l:"nxnote",r:"nxnote "+nxaCap(m[1].trim()),c:g.lines.join("\n")})}
+  }
+  if(k==="text"||k==="list"){
+   if(k==="text"&&NXA_STEP.test(t)){const steps=[];let j=i,last=0;
+    while(j<n){const tj=TT(j);if(K[j]==="blank"&&j+1<n&&NXA_STEP.test(TT(j+1))){j++;continue}if(K[j]!=="text"||!NXA_STEP.test(tj))break;const no=nxaNo(tj);if(steps.length?no!==last+1:no>1)break;last=no;steps.push(tj);j++}
+    if(steps.length>=3&&steps.length<=10&&steps.every(x=>x.length<=160&&nxaWords(x)<=24&&!/[\u0003\u0001]/.test(x)))cand(85,i,j,{l:"nxflow",c:JSON.stringify({s:steps.map(x=>x.replace(/^\*\*(.+?)\*\*/,"$1"))})})}
+   if(NXA_ARRL.test(TT(i+1))){const steps=[];let j=i;while(j<n&&(K[j]==="text"||K[j]==="list")){steps.push(nxaUnb(TT(j).replace(NXA_LM,"").trim()));if(NXA_ARRL.test(TT(j+1))&&(K[j+2]==="text"||K[j+2]==="list"))j+=2;else{j++;break}}
+    if(steps.length>=3&&steps.every(x=>x.length<=90&&nxaWords(x)<=14&&!/[\u0003\u0001]/.test(x)))cand(90,i,j,{l:"nxflow",c:JSON.stringify({s:steps})})}
+   if(/→|⟶|➔|➜|➝|⇒|=>|->|>>/.test(t)){const ch=nxaChain(t.replace(NXA_LM,"").trim());if(ch)cand(ch.s.length>=4?90:85,i,i+1,{l:"nxflow",c:JSON.stringify(ch)})}
+   if(k==="list"&&(i===0||K[i-1]!=="list")){const le=listEval(i);if(le)cand(le.c,le.s,le.e,le.b)}
+   const qa=nxaQ(t);
+   if(qa&&(k==="text"||(qa.num&&K[i-1]!=="list"&&K[i+1]!=="list"))&&!pr(i+1)){let j=i+1,gap=0;while(j<n&&K[j]==="blank"&&gap<1){j++;gap++}
+    if(j<n&&K[j]==="text"&&!isLab(TT(j))&&!nxaQ(TT(j))){const j0=j,pp=para(j,5),txt=pp.pl.join(" ").trim();
+     if(pp.pl.length&&((txt.length>=15&&txt.length<=650)||(/[$]/.test(txt)&&txt.length>=3&&txt.length<=650))){
+      const c=60+(qa.mark?12:0)+(qa.lab?10:0)+(qa.imp?5:0)+(nxaOver(qa.t,txt.slice(0,200))?10:0)+(gap===0?3:0)+(txt.length>=40?5:0);
+      cand(c,j0,pp.end,{l:"answer",r:"answer "+(/[\u0980-\u09FF]/.test(txt)?"উত্তর":"Answer"),c:pp.pl.join("\n")})}}}
+  }
+  if(k==="text"&&(i===0||K[i-1]==="blank"||K[i-1]==="head")){const pp=para(i,4),txt=pp.pl.join(" ").trim();
+   if(pp.pl.length&&!pp.pl.some(x=>/\u0003/.test(x))){let p=i-1,g=0;while(p>=0&&K[p]==="blank"&&g<1){p--;g++}
+    const ctx=p>=0&&K[p]==="head"?TT(p).replace(/^#{1,6}\s+/,""):"",c=nxaDef(txt,ctx);
+    if(c)cand(c,i,pp.end,{l:"nxdef",r:"nxdef "+(/[\u0980-\u09FF]/.test(txt)?"সংজ্ঞা":"Definition"),c:pp.pl.join("\n")})}}
+  if(best){for(let j=i;j<best.s;j++)out.push(L[j]);best.b.k=best.c;blocks.push(best.b);out.push("\u0007"+(blocks.length-1)+"\u0008");i=best.e}
+  else{out.push(L[i]);i++}
+ }
+ return blocks.length?{t:out.join("\n"),b:blocks}:null}
+function nxaAuto(src){if(src.length>400000)return null;const hit=NXA_CACHE.get(src);if(hit!==undefined)return hit;const L=src.split("\n");let res=null;
+ if(L.length<=NXA_MAXL){try{res=nxaRun(L)}catch(e){res=null}}
+ NXA_CACHE.set(src,res);if(NXA_CACHE.size>60)NXA_CACHE.delete(NXA_CACHE.keys().next().value);return res}
+const NXA_ON=()=>{try{return !(st&&st.autofmt===false)}catch(e){return true}};
+function nxaReport(src){const CB=[];src=String(src==null?"":src).replace(/\r\n?/g,"\n").replace(/```([^\n]*)\n?([\s\S]*?)```/g,(m,l,c)=>(CB.push(l),"\u0003"+(CB.length-1)+"\u0004"));const a=nxaAuto(src);return a?a.b.map(b=>({type:b.l,confidence:b.k,text:String(b.c).slice(0,90)})):[]}
+try{window.nxaReport=nxaReport}catch(e){}
 function md(src,opt){opt=opt||{};src=String(src==null?"":src).replace(/\r\n?/g,"\n").replace(/\u00a0/g," ").replace(/\t/g,"  ");
- const M=[],CB=[],VZ=[];src=src.replace(/```([^\n]*)\n?([\s\S]*?)```/g,(m,l,c)=>(CB.push({l:l.trim().toLowerCase(),c}),"\u0003"+(CB.length-1)+"\u0004"));
+ const M=[],CB=[],VZ=[];src=src.replace(/```([^\n]*)\n?([\s\S]*?)```/g,(m,l,c)=>(CB.push({l:l.trim().toLowerCase(),r:l.trim(),c}),"\u0003"+(CB.length-1)+"\u0004"));
+ if(opt.auto!==false&&NXA_ON()){const au=nxaAuto(src);if(au)src=au.t.replace(/\u0007(\d+)\u0008/g,(mm,ix)=>{CB.push(au.b[+ix]);return"\u0003"+(CB.length-1)+"\u0004"})}
  src=normMath(src);src=nxBareRuns(src,M);src=src.replace(MRE,(m,env,pre,inner)=>{if(inner!==undefined){if(/\s$/.test(inner))return m;M.push({t:inner,d:false});return pre+"\u0001"+(M.length-1)+"\u0002"}
   if(env){M.push({t:m,d:true,env});return "\u0001"+(M.length-1)+"\u0002"}
   if(m.startsWith("$$"))M.push({t:m.slice(2,-2),d:true});else if(m.startsWith("\\["))M.push({t:m.slice(2,-2),d:true});else M.push({t:m.slice(2,-2),d:false});return "\u0001"+(M.length-1)+"\u0002"});
@@ -985,8 +1143,8 @@ function md(src,opt){opt=opt||{};src=String(src==null?"":src).replace(/\r\n?/g,"
  for(let k=0;k<L.length;k++){const t=L[k].trim();let m,r;
   if(!t){fl();continue}
   const wasFirst=first;first=false;
-  if(m=t.match(/^\u0003(\d+)\u0004$/)){fl();const cb=CB[+m[1]];const w0=cb.l.split(/\s+/),vid0=/^#[a-z0-9]+$/.test(w0[1]||"")?w0[1].slice(1):"";if(w0[0]==="chart"||w0[0]==="graph"||w0[0]==="mermaid"){VZ.push(w0[0]==="mermaid"?nxChart(JSON.stringify({type:"mermaid",code:cb.c}),0,vid0):nxChart(cb.c,0,vid0));out.push("\u0005"+(VZ.length-1)+"\u0006")}else out.push("<pre><code>"+esc(cb.c.replace(/\n$/,""))+"</code></pre>");continue}
-  if(m=t.match(/^!\[([^\]]*)\]\(([^)]*)\)$/)){fl();out.push('<div class="nxi" data-cap="'+esc(m[1])+'"><small class="meta">'+esc(m[1])+'</small></div>');continue}
+  if(m=t.match(/^\u0003(\d+)\u0004$/)){fl();const cb=CB[+m[1]];const w0=cb.l.split(/\s+/),vid0=/^#[a-z0-9]+$/.test(w0[1]||"")?w0[1].slice(1):"";if(w0[0]==="chart"||w0[0]==="graph"||w0[0]==="mermaid"){VZ.push(w0[0]==="mermaid"?nxChart(JSON.stringify({type:"mermaid",code:cb.c}),0,vid0):nxChart(cb.c,0,vid0));out.push("\u0005"+(VZ.length-1)+"\u0006")}else if(Object.prototype.hasOwnProperty.call(NXB,w0[0])){VZ.push(NXB[w0[0]](cb));out.push("\u0005"+(VZ.length-1)+"\u0006")}else out.push("<pre><code>"+esc(cb.c.replace(/\n$/,""))+"</code></pre>");continue}
+  if(m=t.match(/^!\[([^\]]*)\]\(([^)]*)\)$/)){fl();out.push('<div class="nxi" data-cap="'+esc(m[1])+'"'+(nxUrl(m[2])?' data-src="'+esc(nxUrl(m[2]))+'"':"")+'><small class="meta">'+esc(m[1])+'</small></div>');continue}
   if(t[0]==="|"&&L[k+1]&&/^\s*\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/.test(L[k+1])){fl();const rw=l=>l.trim().replace(/^\||\|$/g,"").split("|").map(c=>c.trim()),hd=rw(t),rows=[];k+=2;while(k<L.length&&L[k].trim()[0]==="|"){rows.push(rw(L[k]));k++}k--;
    out.push('<div class="tw"><table><thead><tr>'+hd.map(c=>"<th>"+inl(c)+"</th>").join("")+"</tr></thead><tbody>"+rows.map(x=>"<tr>"+x.map(c=>"<td>"+inl(c)+"</td>").join("")+"</tr>").join("")+"</tbody></table></div>");continue}
   if(opt.title&&wasFirst&&opt.smart!==false&&!looksMath(t)&&!chemLine(t)&&t.length<=90&&!/[.?!:;।,\u0001\u0003]$/.test(t)&&!/\u0001|\u0003/.test(t)&&!/^([#>|*\-•]|\d+[.)]|[০-৯]+[.।)])/.test(t)&&!LAB.test(t)&&!OPTR.test(t)&&t.split(/\s+/).length<=14&&L.slice(k+1).some(x=>x.trim())){out.push(`<h2 class="ttl">${inl(t)}</h2>`);continue}
@@ -1019,11 +1177,11 @@ function mfix(el){try{const D=MathJax.startup.document;for(const it of D.math){c
 
 /* lists */
 const match=q=>i=>(i.title+" "+i.chapter+" "+(i.body||"")+" "+i.tags.join(" ")+" "+subj(i.subj)[1]+" "+subj(i.subj)[2]+" "+catOf(i.cat)[1]).toLowerCase().includes(q);
-const sorter=(a,b)=>sort==="name"?a.title.localeCompare(b.title,"bn"):sort==="old"?a.created-b.created:sort==="big"?b.size-a.size:b.created-a.created;
-function row(i){const s=subj(i.subj);return `<div class="row" onclick="openItem('${i.id}')"><div class="kd k-${i.kind}">${KL[i.kind]}</div><div class="mid"><b>${esc(i.title)}</b>
+const sorter=(a,b)=>sort==="custom"?((a.ord||1e9)-(b.ord||1e9))||(b.created-a.created):sort==="name"?a.title.localeCompare(b.title,"bn"):sort==="old"?a.created-b.created:sort==="big"?b.size-a.size:b.created-a.created;
+function row(i){const s=subj(i.subj);return `<div class="row" data-id="${i.id}" onclick="openItem('${i.id}')">${icTile(i)}<div class="mid"><b>${esc(i.title)}</b>
 <div class="meta">${esc(s[1])}${i.chapter?" · "+esc(i.chapter):""} · ${catOf(i.cat)[1]}${i.size?" · "+fmt(i.size):""}${i.marks&&i.marks.length?" · "+i.marks.length+" marks":""} · ${new Date(i.created).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</div>
 ${i.tags.length?`<div class="tg">${i.tags.map(t=>"#"+esc(t)).join(" ")}</div>`:""}${i.prog?`<div class="pgb"><i style="width:${i.prog}%"></i></div>`:""}</div>
-<div class="acts" onclick="event.stopPropagation()"><button class="${i.fav?"on":""}" title="Favorite" onclick="toggleFav('${i.id}')">${i.fav?"★":"☆"}</button><button title="Edit" onclick="openForm('${i.id}')">${IC.edit}</button><button title="Delete" onclick="remove('${i.id}')">${IC.trash}</button></div></div>`}
+<div class="acts" onclick="event.stopPropagation()"><button class="${i.fav?"on":""}" title="Favorite" onclick="toggleFav('${i.id}')">${i.fav?"★":"☆"}</button><button title="Edit" onclick="openForm('${i.id}')">${IC.edit}</button><button title="Delete" onclick="remove('${i.id}')">${IC.trash}</button></div>${dhBtn(i)}</div>`}
 const list=(a,msg)=>a.length?a.slice().sort(sorter).map(row).join(""):`<div class="empty">${ILL.empty}${msg||"Nothing here yet."}<br><br><button class="btn" onclick="openForm()">＋ Add your first item</button></div>`;
 function grouped(a){if(!a.length)return list(a,"Nothing in this category.");const g={};a.forEach(i=>(g[i.chapter||""]=g[i.chapter||""]||[]).push(i));const ks=Object.keys(g).sort((x,y)=>!x?1:!y?-1:x.localeCompare(y,"bn",{numeric:true}));return ks.map(k=>(k?`<h3 class="ch">${esc(k)}</h3>`:ks.length>1?'<h3 class="ch">No chapter</h3>':"")+list(g[k])).join("")}
 
@@ -1034,7 +1192,7 @@ function render(){paintAv();
  else if(view){const s=subj(view),all=items.filter(i=>i.subj===view),sh=all.filter(i=>cat==="all"||i.cat===cat);
   m.innerHTML=`<div class="flex"><button class="btn alt" onclick="goHome()">← Back</button></div><div class="sh">${badge(s)}<div><h1>${esc(s[1])}</h1><span>${esc(s[2])} · ${all.length} item${all.length===1?"":"s"}</span></div></div>
   <div class="flex"><button class="chip ${cat==="all"?"on":""}" onclick="cat='all';render()">All</button>${CATS.map(c=>`<button class="chip ${cat===c[0]?"on":""}" onclick="cat='${c[0]}';render()">${c[1]} ${all.filter(i=>i.cat===c[0]).length}</button>`).join("")}</div>
-  <div class="flex"><span class="meta">Sort</span><select style="width:auto" onchange="sort=this.value;render()">${[["new","Newest first"],["old","Oldest first"],["name","Name"],["big","Largest first"]].map(o=>`<option value="${o[0]}" ${sort===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select></div>`+grouped(sh)}
+  <div class="flex"><span class="meta">Sort</span><select style="width:auto" onchange="sort=this.value;render()">${[["new","Newest first"],["old","Oldest first"],["name","Name"],["big","Largest first"],["custom","My order (drag)"]].map(o=>`<option value="${o[0]}" ${sort===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select></div>`+grouped(sh)}
  else m.innerHTML=homeHtml()
 }
 function setGroup(g){group=g;LS.set("sl-g",g);view=null;cat="all";render()}
@@ -1140,6 +1298,7 @@ function openForm(id){editId=id||null;const i=id?items.find(x=>x.id===id):null;i
  ${i?"":`<div class="flex" style="margin-top:0"><button class="chip" id="k-pdf" onclick="setKind('pdf')">PDF</button><button class="chip" id="k-text" onclick="setKind('text')">Note / Text</button><button class="chip" id="k-link" onclick="setKind('link')">Link</button></div>`}
  <div class="two"><div><label class="l">Subject</label><select id="f-s">${subjects().map(s=>`<option value="${s[0]}" ${s[0]===cs?"selected":""}>${esc(s[1])}${s[2]!=="Custom"?" · "+esc(s[2]):""}</option>`).join("")}</select></div>
  <div><label class="l">Category</label><select id="f-c">${CATS.map(c=>`<option value="${c[0]}" ${i&&i.cat===c[0]?"selected":""}>${c[1]}</option>`).join("")}</select></div></div>
+ ${icField(i)}
  <label class="l">Title</label><input id="f-t" value="${esc(i?i.title:"")}" placeholder="e.g. Chapter 3 – Sets (for several PDFs, file names are used)">
  <label class="l">Chapter / topic (optional)</label><input id="f-ch" value="${esc(i?i.chapter:"")}" placeholder="e.g. Chapter 3">
  <div id="b-pdf" class="${fk==="pdf"&&!i?"":"hide"}"><label class="l">PDF files</label><label class="drop" id="dz"><span>Drop PDFs here or tap to choose</span><input type="file" id="f-f" accept="application/pdf,.pdf" multiple class="fov" onchange="$('#dz span').textContent=this.files.length+' file(s) selected'"></label></div>
@@ -1150,7 +1309,7 @@ function openForm(id){editId=id||null;const i=id?items.find(x=>x.id===id):null;i
  if(!i)setKind(fk);
  const dz=$("#dz");if(dz){["dragover","dragenter"].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.classList.add("hl")}));["dragleave","drop"].forEach(e=>dz.addEventListener(e,()=>dz.classList.remove("hl")));dz.addEventListener("drop",ev=>{ev.preventDefault();$("#f-f").files=ev.dataTransfer.files;$("#dz span").textContent=ev.dataTransfer.files.length+" file(s) selected"})}}
 async function save(){
- const m=t=>$("#msg").textContent=t,base={subj:$("#f-s").value,cat:$("#f-c").value,chapter:$("#f-ch").value.trim(),tags:$("#f-tg").value.split(/[,،]/).map(t=>t.trim()).filter(Boolean)},title=$("#f-t").value.trim();
+ const m=t=>$("#msg").textContent=t,base={subj:$("#f-s").value,cat:$("#f-c").value,chapter:$("#f-ch").value.trim(),tags:$("#f-tg").value.split(/[,،]/).map(t=>t.trim()).filter(Boolean),ic:icPend||null},title=$("#f-t").value.trim();
  try{
  if(editId){const i=items.find(x=>x.id===editId);if(!title)return m("Please add a title.");Object.assign(i,base,{title});if(i.kind!=="pdf"){i.body=$("#ta").value.trim();i.size=new Blob([i.body]).size}if(i.kind==="link")i.url=$("#f-u").value.trim();await S.put(i)}
  else if(fk==="pdf"){const fl=[...$("#f-f").files];if(!fl.length)return m("Choose at least one PDF.");if(fl.some(f=>!/\.pdf$/i.test(f.name)&&f.type!=="application/pdf"))return m("Only PDF files are allowed.");
@@ -1169,10 +1328,10 @@ async function save(){
  closeM();if(!S.cloud)await refresh();useUsage();if(cur&&editId&&cur.id===editId)openItem(cur.id);toast("Saved ✓");try{nxqAfter(editId||(fk==="text"?NXQ_NEW:null))}catch(e){}}
 
 /* ===== full-page note editor ===== */
-const EDB=[["H","### ","","Heading"],["B","**","**","Bold"],["I","*","*","Italic"],["•","- ","","Bullet list"],["1.","1. ","","Numbered list"],["Q","Question: ","","Question"],["Sol","Solution: ","","Solution"],["Def","Definition: ","","Definition"],["$x$","$","$","Inline math"],["$$","$$\n","\n$$","Display math"],["a/b","$\\frac{","}{}$","Fraction"],["√","$\\sqrt{","}$","Square root"],["xⁿ","^{","}","Power"],["xₙ","_{","}","Subscript"],["∑","$\\sum_{i=1}^{n}$","","Sum"],["∫","$\\int_{a}^{b}$","","Integral"],["α","$\\alpha$","","alpha"],["θ","$\\theta$","","theta"],["π","$\\pi$","","pi"],["→","$\\rightarrow$","","Arrow"],["Bar","\n```chart\n{\"type\":\"bar\",\"title\":\"Title\",\"labels\":[\"A\",\"B\",\"C\"],\"series\":[{\"name\":\"Series 1\",\"data\":[3,5,2]}],\"ylabel\":\"Value\"}\n```\n","","Bar chart"],["Line","\n```chart\n{\"type\":\"line\",\"title\":\"Title\",\"x\":[0,1,2,3,4],\"series\":[{\"name\":\"Series 1\",\"data\":[0,2,4,6,8]}],\"xlabel\":\"x\",\"ylabel\":\"y\"}\n```\n","","Line graph"],["f(x)","\n```chart\n{\"type\":\"function\",\"title\":\"y = x^2 - 4\",\"fn\":\"x^2-4\",\"xmin\":-5,\"xmax\":5}\n```\n","","Function graph"]];
+const EDB=[["H","### ","","Heading"],["B","**","**","Bold"],["I","*","*","Italic"],["•","- ","","Bullet list"],["1.","1. ","","Numbered list"],["Q","Question: ","","Question"],["Sol","Solution: ","","Solution"],["Def","Definition: ","","Definition"],["$x$","$","$","Inline math"],["$$","$$\n","\n$$","Display math"],["a/b","$\\frac{","}{}$","Fraction"],["√","$\\sqrt{","}$","Square root"],["xⁿ","^{","}","Power"],["xₙ","_{","}","Subscript"],["∑","$\\sum_{i=1}^{n}$","","Sum"],["∫","$\\int_{a}^{b}$","","Integral"],["α","$\\alpha$","","alpha"],["θ","$\\theta$","","theta"],["π","$\\pi$","","pi"],["→","$\\rightarrow$","","Arrow"],["Bar","\n```chart\n{\"type\":\"bar\",\"title\":\"Title\",\"labels\":[\"A\",\"B\",\"C\"],\"series\":[{\"name\":\"Series 1\",\"data\":[3,5,2]}],\"ylabel\":\"Value\"}\n```\n","","Bar chart"],["Line","\n```chart\n{\"type\":\"line\",\"title\":\"Title\",\"x\":[0,1,2,3,4],\"series\":[{\"name\":\"Series 1\",\"data\":[0,2,4,6,8]}],\"xlabel\":\"x\",\"ylabel\":\"y\"}\n```\n","","Line graph"],["f(x)","\n```chart\n{\"type\":\"function\",\"title\":\"y = x^2 - 4\",\"fn\":\"x^2-4\",\"xmin\":-5,\"xmax\":5}\n```\n","","Function graph"],["Box","\n```answer Answer\n","\n```\n","Answer box"],["Flow","\n```concept\nMain idea\nPart A | Part B | Part C | Part D\nResult\n```\n","","Concept flow"],["Img+","\n```media\n![Image name]()\n**Title**\nShort description\n\n![Image name 2]()\n**Title 2**\nShort description\n```\n","","Image and text rows"]];
 function openEditor(id,sj){const i=id?items.find(x=>x.id===id):null;ed={id:i?i.id:null};const cs=i?i.subj:(sj||view||"gen");
  $("#nb").innerHTML=`<div class="nb"><div class="nbh"><button class="btn alt" onclick="edClose()">← Back</button><input id="e-t" class="et" placeholder="Note title" value="${esc(i?i.title:"")}"><button class="btn alt edv" onclick="$('.edb').classList.toggle('pv')">Preview</button><button class="btn" onclick="edSave()">Save</button></div>
- <div class="edm"><select id="e-s">${subjects().map(s=>`<option value="${s[0]}" ${s[0]===cs?"selected":""}>${esc(s[1])}</option>`).join("")}</select><select id="e-c">${CATS.map(c=>`<option value="${c[0]}" ${i&&i.cat===c[0]?"selected":""}>${c[1]}</option>`).join("")}</select><input id="e-ch" placeholder="Chapter" value="${esc(i?i.chapter:"")}"><input id="e-tg" placeholder="Tags, comma separated" value="${esc(i?i.tags.join(", "):"")}"></div>
+ <div class="edm">${icField(i)}<select id="e-s">${subjects().map(s=>`<option value="${s[0]}" ${s[0]===cs?"selected":""}>${esc(s[1])}</option>`).join("")}</select><select id="e-c">${CATS.map(c=>`<option value="${c[0]}" ${i&&i.cat===c[0]?"selected":""}>${c[1]}</option>`).join("")}</select><input id="e-ch" placeholder="Chapter" value="${esc(i?i.chapter:"")}"><input id="e-tg" placeholder="Tags, comma separated" value="${esc(i?i.tags.join(", "):"")}"></div>
  <div class="edt"><button class="chip on" onclick="cleanPaste()">Clean paste</button>${EDB.map((b,n)=>`<button class="chip" title="${b[3]}" onmousedown="event.preventDefault()" onclick="ins(${n})">${esc(b[0])}</button>`).join("")}</div>
  <div class="edb"><textarea id="e-ta" oninput="edPrev()" placeholder="Write or paste your note. Use $x^2$ for LaTeX and Question: / Solution: for practice problems.">${esc(i&&i.body||"")}</textarea><div class="paper"><div class="sheet"><div class="doc" id="e-pv"></div></div></div></div></div>`;
  document.body.style.overflow="hidden";edPrev()}
@@ -1180,7 +1339,7 @@ function edPrev(){clearTimeout(ept);ept=setTimeout(()=>{const p=$("#e-pv");if(!p
 function ins(n){const t=$("#e-ta"),[,a,b]=EDB[n],s0=t.selectionStart,e0=t.selectionEnd,sel=t.value.slice(s0,e0);t.setRangeText(a+sel+b,s0,e0,"end");const p=s0+a.length+sel.length;t.focus();t.setSelectionRange(p,p);edPrev()}
 function edClose(){ed=null;if(cur)openItem(cur.id);else{$("#nb").innerHTML="";document.body.style.overflow=""}}
 async function edSave(){const title=$("#e-t").value.trim(),body=$("#e-ta").value.trim();if(!title)return toast("Please add a title");if(!body)return toast("Write something first");
- const base={subj:$("#e-s").value,cat:$("#e-c").value,chapter:$("#e-ch").value.trim(),tags:$("#e-tg").value.split(/[,،]/).map(t=>t.trim()).filter(Boolean),title,body,size:new Blob([body]).size};let id=ed.id;
+ const base={subj:$("#e-s").value,cat:$("#e-c").value,chapter:$("#e-ch").value.trim(),tags:$("#e-tg").value.split(/[,،]/).map(t=>t.trim()).filter(Boolean),ic:icPend||null,title,body,size:new Blob([body]).size};let id=ed.id;
  try{if(id){const i=items.find(x=>x.id===id);Object.assign(i,base);await S.put(i)}else{id=crypto.randomUUID();const it={id,kind:"text",url:"",fav:false,opened:0,created:Date.now(),marks:[],...base};items.push(it);await S.put(it)}}
  catch(e){return toast("Couldn’t save: "+((e&&e.message)||"error"))}
  if(!S.cloud)await refresh();ed=null;toast("Saved ✓");openItem(id);try{nxqAfter(id)}catch(e){}}
@@ -1260,7 +1419,7 @@ function openPhoto(k,im){ph={k,im,x:0,y:0,z:1,rot:0,p:{...PR.Original},d:null,q:
  c.onpointermove=e=>{if(!ph.d)return;const sc=c.width/c.getBoundingClientRect().width;ph.x=ph.d[2]+(e.clientX-ph.d[0])*sc;ph.y=ph.d[3]+(e.clientY-ph.d[1])*sc;pd()};c.onpointerup=()=>{ph.d=null};pd()}
 
 /* ===== circle to ask + AI chat ===== */
-const SYS="You are Nuvex AI, a careful and friendly tutor for Bangladeshi SSC students (NCTB curriculum, classes 9 and 10). Reply in the language the student writes in (Bangla or English); when helpful, give key terms in both. Accuracy comes first: work problems step by step, check calculations and units, verify an answer by substituting back when possible, and never invent facts, formulas, page numbers or past board questions. If you are not sure, say so plainly and explain how to check. Start with the direct answer or a one-line summary, then the explanation, then a short final line starting with Answer: for problems. Keep explanations at SSC level and use examples from Bangladeshi daily life where it helps. Write maths in LaTeX: $...$ inline and $$...$$ for display. For worked problems use lines starting with Question: and Solution:. If the student's own notes are provided as reference, prefer them when they are relevant and name the note you used. Ask one short clarifying question only when the request is truly ambiguous."+" When a chart or graph would genuinely help (comparing numbers, showing a trend, or plotting a function), add ONE fenced block that starts with ```chart on its own line, then a single JSON object, then ```. Bar or line: {\"type\":\"bar\",\"title\":\"...\",\"labels\":[\"A\",\"B\"],\"series\":[{\"name\":\"...\",\"data\":[1,2]}],\"xlabel\":\"...\",\"ylabel\":\"...\"}; for a line graph with numeric x use \"x\":[0,1,2] instead of labels. Function graph: {\"type\":\"function\",\"fn\":\"x^2-4\",\"xmin\":-5,\"xmax\":5,\"points\":[{\"x\":2,\"y\":0,\"label\":\"root\"}]} where fn uses only x, numbers, + - * / ^, brackets, pi, e, sin, cos, tan, sqrt, abs, ln, log, exp. Use only data given in the question or the notes; never invent data. Otherwise do not add a chart.";
+const SYS="You are Nuvex AI, a careful and friendly tutor for Bangladeshi SSC students (NCTB curriculum, classes 9 and 10). Reply in the language the student writes in (Bangla or English); when helpful, give key terms in both. Accuracy comes first: work problems step by step, check calculations and units, verify an answer by substituting back when possible, and never invent facts, formulas, page numbers or past board questions. If you are not sure, say so plainly and explain how to check. Start with the direct answer or a one-line summary, then the explanation, then a short final line starting with Answer: for problems. Keep explanations at SSC level and use examples from Bangladeshi daily life where it helps. Write maths in LaTeX: $...$ inline and $$...$$ for display. For worked problems use lines starting with Question: and Solution:. If the student's own notes are provided as reference, prefer them when they are relevant and name the note you used. Ask one short clarifying question only when the request is truly ambiguous."+" When a chart or graph would genuinely help (comparing numbers, showing a trend, or plotting a function), add ONE fenced block that starts with ```chart on its own line, then a single JSON object, then ```. Bar or line: {\"type\":\"bar\",\"title\":\"...\",\"labels\":[\"A\",\"B\"],\"series\":[{\"name\":\"...\",\"data\":[1,2]}],\"xlabel\":\"...\",\"ylabel\":\"...\"}; for a line graph with numeric x use \"x\":[0,1,2] instead of labels. Function graph: {\"type\":\"function\",\"fn\":\"x^2-4\",\"xmin\":-5,\"xmax\":5,\"points\":[{\"x\":2,\"y\":0,\"label\":\"root\"}]} where fn uses only x, numbers, + - * / ^, brackets, pi, e, sin, cos, tan, sqrt, abs, ln, log, exp. Use only data given in the question or the notes; never invent data. Otherwise do not add a chart."+" Structure notes like a professional study guide, but only where it genuinely helps: write explanations as ordinary paragraphs, and never force special blocks. For a problem or question with a clear final result, put that result in ONE fenced block that starts with ```answer on its own line (optionally a short label after the word answer), then the answer text, then ```; use it instead of a separate Answer: line. For a genuine sequential process of 3 to 8 short steps (a biological, chemical, physical or historical sequence, or solving steps), use ONE fenced block that starts with ```flow on its own line, one short step per line in order, then ```; unrelated facts stay an ordinary list. For a simple overview or classification you may use ONE ```concept block: each line is one level from top to bottom and boxes in the same level are separated by \" | \". For an important definition write a line starting with Definition: (or সংজ্ঞা:), and for a key warning or tip write a line starting with Important: (or মনে রাখবে:). Use each block at most once per reply and only when it really helps.";
 function stopCircle(){["cv","cvh"].forEach(id=>{const e=document.getElementById(id);if(e)e.remove()})}
 function circleMode(){if($("#cv"))return stopCircle();hideTb();
  const c=document.createElement("canvas");c.id="cv";c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);
@@ -1543,7 +1702,7 @@ function readCard(rw,tg,seg){const rg=(k,min,max,step,w)=>`<input type="range" m
  return `<h2>Reading mode</h2><div class="scard"><div class="srow"><div><b>Presets</b><small>One tap to set paper, comfort and focus together</small></div><div class="flex" style="margin:0">${Object.keys(RPRE).map(n=>`<button class="chip" onclick="rPre('${n}')">${n}</button>`).join("")}</div></div>
  ${rw("Paper tone","Background of the reading page",seg("rtone",[["white","White"],["cream","Cream"],["sepia","Sepia"],["grey","Grey"],["night","Night"],["black","Black"]]))}${rw("Text weight","",seg("rweight",[["400","Regular"],["500","Medium"],["700","Bold"]]))}${rw("Text alignment","",seg("ralign",[["left","Left"],["justify","Justified"]]))}
  ${rw("Letter spacing","",rg("rls",-0.01,0.08,0.005))}${rw("Paragraph spacing","",rg("rps",0.4,2.2,0.1))}${rw("Eye comfort","Warm light filter while reading",rg("rwarm",0,100,5))}${rw("Brightness dim","Darken the page while reading",rg("rdim",0,60,5))}
- ${tg("rruler","Reading ruler","A soft band across the middle of the screen to keep your place")}${asCard()}${tg("awake","Keep screen awake","While a note or PDF is open")}
+ ${tg("rruler","Reading ruler","A soft band across the middle of the screen to keep your place")}${rw("App build","Shows which file version is running on this device","<span class=\"meta\">auto-format · image URLs · 2026-11-17</span>")}${tg("autofmt","Auto-format notes","Shows answers, definitions, key notes and step-by-step processes as boxes and flowcharts when it is confident. Your saved text is never changed.")}${asCard()}${tg("awake","Keep screen awake","While a note or PDF is open")}
  <div class="srow"><div><b>Reset reading mode</b></div><button class="btn alt" onclick="rReset()">Reset</button></div></div>`}
 const HPRE={Classic:{y:"#f2b900",r:"#e5484d",o:"#f08a24",v:"#8e5cf0",c:"#12b5cb",b:"#2f8fff",p:"#ee4d86",g:"#2fb36a"},Pastel:{y:"#ffe08a",r:"#ff9aa2",o:"#ffc89b",v:"#c7b2f5",c:"#9fe3ee",b:"#a5c8ff",p:"#ffb7d5",g:"#b5ecc2"},Vivid:{y:"#ffd600",r:"#ff1744",o:"#ff6d00",v:"#7c4dff",c:"#00e5ff",b:"#2979ff",p:"#f50057",g:"#00e676"},Earth:{y:"#d9a441",r:"#b5443a",o:"#c97b3a",v:"#7a5c8e",c:"#4f8f8b",b:"#4a6fa5",p:"#b8627a",g:"#5f8f55"}};
 function liveCol(kind,k,v){document.documentElement.style.setProperty("--"+kind+"-"+k,v)}
@@ -1871,12 +2030,12 @@ const nxK=s=>String(s||"").toLowerCase().replace(/^file:/,"").replace(/\.(png|jp
 const nxT=s=>new Set(nxK(s).split(" ").filter(w=>w.length>1));
 function nxS(a,b){const A=nxT(a),B=nxT(b);if(!A.size||!B.size)return 0;let n=0;A.forEach(w=>{if(B.has(w))n++});return n/Math.min(A.size,B.size)}
 function nxFind(cap){const m=((cur&&cur.imap)||{})[nxK(cap)];if(m&&NXI.some(i=>i.id===m))return m;let b=null,bs=0,sc=0;NXI.forEach(i=>{const s=nxS(cap,i.name);if(s>bs){sc=bs;bs=s;b=i}else if(s>sc)sc=s});return b&&bs>=.6&&bs-sc>.15?b.id:null}
-const nxCaps=()=>[...new Set([...(cur&&cur.body||"").matchAll(/^\s*!\[([^\]]*)\]\([^)]*\)\s*$/gm)].map(m=>m[1]))];
+const nxCaps=()=>[...new Set([...(cur&&cur.body||"").matchAll(/^\s*!\[([^\]]*)\]\(([^)]*)\)\s*$/gm)].filter(m=>!nxUrl(m[2])).map(m=>m[1]))];
 function nxImgs(dc){dc.querySelectorAll(".nxs").forEach(x=>x.remove());const ph=[...dc.querySelectorAll(".nxi")];if(!ph.length)return;let miss=0;const done=new Set();
  ph.forEach(e=>{if(done.has(e))return;const run=[e];let n=e.nextElementSibling;while(n&&n.classList.contains("nxi")){run.push(n);n=n.nextElementSibling}run.forEach(x=>done.add(x));
   const g=document.createElement("div");g.className=run.length>1?"nxg":"nxg one";
-  run.forEach(x=>{const cap=x.dataset.cap,id=nxFind(cap),f=document.createElement(id?"figure":"button");f.dataset.cap=cap;
-   if(id){f.className="nxf";f.innerHTML='<img loading="lazy" alt="" src="'+nxSrc(id)+'"><figcaption></figcaption>';f.querySelector("figcaption").textContent=cap;f.querySelector("img").onerror=()=>{f.className="nxc";f.textContent="Image failed to load: "+cap;f.onclick=()=>nxPick(cap)};f.onclick=()=>nxOpen(g,f)}
+  run.forEach(x=>{const cap=x.dataset.cap,url=x.dataset.src||"",id=url?null:nxFind(cap),f=document.createElement(id||url?"figure":"button");f.dataset.cap=cap;
+   if(id||url){f.className="nxf";f.innerHTML='<img loading="lazy" alt="" referrerpolicy="no-referrer"><figcaption></figcaption>';f.querySelector("figcaption").textContent=cap;f.querySelector("img").onerror=()=>{f.className="nxc";f.textContent=(url?"Image link did not load (check the URL): ":"Image failed to load: ")+cap;f.onclick=()=>nxPick(cap)};f.querySelector("img").src=url||nxSrc(id);f.onclick=()=>nxOpen(g,f)}
    else{miss++;f.className="nxc";f.textContent="🖼 "+cap+" · tap to choose";f.onclick=()=>nxPick(cap)}
    g.appendChild(f)});
   e.replaceWith(g);run.slice(1).forEach(x=>x.remove())});
@@ -2750,7 +2909,7 @@ const raSvg=(k,s)=>`<svg viewBox="0 0 24 24" width="${s||"1.15em"}" height="${s|
 const RA={on:0,paused:0,gen:0,blocks:[],i:-1,segs:[],k:0,dc:null,cur:null,cu:null,panel:null,voices:[],sel:null,userT:0,startAt:0,busy:0,wd:0,t:0,missBn:0,missEn:0,fail:0,lastCtx:"",tapB:null,mode:"note",vTried:0,done:0,msg:""};
 const RABS="p,li,h1,h2,h3,h4,h5,h6,blockquote,.opt,.mq,.ma,td,th,dt,dd,figcaption";
 const RAMATH=".katex-display,mjx-container[display=\"true\"]";
-const RATTS=()=>!!(window.speechSynthesis&&window.SpeechSynthesisUtterance);
+const RATTS=()=>!!(window.speechSynthesis&&window.SpeechSynthesisUtterance)||(typeof ELON==="function"&&ELON());
 const raRate=()=>+st.raRate||1;
 
 /* ---- voices (loaded asynchronously, never assumed) ---- */
@@ -2825,6 +2984,7 @@ function raEnter(i){const b=RA.blocks[i];if(!b)return false;
 function raStep(){
  if(!RA.on||RA.paused)return;const g=RA.gen;
  if(!RA.dc||RA.dc!==$("#dc")){raClose();return}
+ if(typeof ELON==="function"&&ELON()){elStep(g);return}
  for(let guard=0;guard<4000;guard++){
   if(RA.k>=RA.segs.length){if(RA.i+1>=RA.blocks.length){raDone();return}if(!raEnter(RA.i+1))return;continue}
   const s=RA.segs[RA.k],v=raVoiceFor(s.l);
@@ -2847,7 +3007,7 @@ function raMode(m){if(m==="sel"&&!raSelNow()){toast(RAL("Select some text first,
 function raSetRate(v){setSt("raRate",String(v),1);raRestartSeg();raUi()}
 function raRateNext(){const R=[.75,1,1.25,1.5,2],k=R.indexOf(raRate());raSetRate(R[(k+1)%R.length])}
 function raVoiceSet(k,v){setSt(k,v,1);raRestartSeg();raUi()}
-document.addEventListener("visibilitychange",()=>{if(document.hidden&&RA.on&&!RA.paused)raPause(RAL("Paused: the browser stops speech when the screen is off or the app is in the background","থেমে আছে: স্ক্রিন বন্ধ বা ব্যাকগ্রাউন্ডে ব্রাউজার পড়া বন্ধ করে দেয়"))});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&RA.on&&!RA.paused&&!(typeof ELON==="function"&&ELON()))raPause(RAL("Paused: the browser stops speech when the screen is off or the app is in the background","থেমে আছে: স্ক্রিন বন্ধ বা ব্যাকগ্রাউন্ডে ব্রাউজার পড়া বন্ধ করে দেয়"))});
 
 /* ---- toolbar button + panel ---- */
 function raToggle(){if(!RATTS()){toast(RAL("This browser can’t read aloud (no speech synthesis)","এই ব্রাউজারে পড়ে শোনানোর সুবিধা নেই"));return}
@@ -2902,6 +3062,288 @@ TBA.read={n:"Read Aloud",k:"t",ic:raSvg("wave"),h:()=>`<button class="tbb${RA.pa
 TBD.splice(Math.max(0,TBD.indexOf("auto")),0,"read");
 {const _cn=closeNb;closeNb=function(){raClose();return _cn.apply(this,arguments)};
  const _oi=openItem;openItem=async function(){raClose();return _oi.apply(this,arguments)}}
+
+/* ===== Read Aloud · ElevenLabs voice engine (optional; device voices stay the default and the fallback) ===== */
+var EL={key:"",ready:false,cache:new Map(),voices:[],a:null,res:null,fb:false};
+const ELK="nx-el",ELV="nx-elv",ELAPI="https://api.elevenlabs.io";
+const ELMODELS=[["eleven_v3","Eleven v3 · 70+ languages incl. Bangla & Arabic (recommended)",5000,1],["eleven_v4","Eleven v4 · newest, longer text",10000,1],["eleven_multilingual_v2","Multilingual v2 · very stable, no Bangla",10000,0],["eleven_flash_v2_5","Flash v2.5 · fastest, no Bangla",40000,0]];
+const elModel=()=>ELMODELS.some(m=>m[0]===st.elModel)?st.elModel:"eleven_v3";
+const elMeta=()=>ELMODELS.find(m=>m[0]===elModel());
+const elMax=()=>Math.min(4500,elMeta()[2]);
+function ELON(){return !!EL&&st.raEngine==="eleven"&&!!EL.key&&!EL.fb}
+const elTe=new TextEncoder(),elTd=new TextDecoder();
+const elB64=u=>{let s="";for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)},elU8=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+function elIdb(){return new Promise(r=>{try{const q=indexedDB.open("nuvex-sec",1);q.onupgradeneeded=()=>q.result.createObjectStore("k");q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}})}
+async function elCk(){try{const d=await elIdb();if(!d||!crypto.subtle)return null;
+ const g=await new Promise(r=>{const q=d.transaction("k").objectStore("k").get("el");q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});if(g)return g;
+ const k=await crypto.subtle.generateKey({name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+ await new Promise((ok,no)=>{const t=d.transaction("k","readwrite");t.objectStore("k").put(k,"el");t.oncomplete=ok;t.onerror=no});return k}catch(e){return null}}
+async function elPersist(){try{if(!EL.key){localStorage.removeItem(ELK);return true}const k=await elCk();if(!k)return false;
+ const iv=crypto.getRandomValues(new Uint8Array(12)),ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},k,elTe.encode(JSON.stringify({k:EL.key})));
+ localStorage.setItem(ELK,JSON.stringify({e:1,iv:elB64(iv),c:elB64(new Uint8Array(ct))}));return true}catch(e){return false}}
+async function elLoad(){try{const s=localStorage.getItem(ELK);if(s){const j=JSON.parse(s);if(j.e){const k=await elCk();if(k)EL.key=JSON.parse(elTd.decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:elU8(j.iv)},k,elU8(j.c)))).k||""}}}catch(e){}
+ try{EL.voices=JSON.parse(localStorage.getItem(ELV)||"[]")}catch(e){}EL.ready=true;try{raUi()}catch(e){}}
+elLoad();
+
+/* ---- errors, fetch, cache ---- */
+function elErr(status,detail){const d=String(detail||""),e=new Error("ElevenLabs "+status);e.status=status;
+ if(status===401&&/missing_permissions/.test(d)){e.code="perm";e.userMsg=RAL("This ElevenLabs key lacks a needed permission","এই ElevenLabs কী-এর প্রয়োজনীয় অনুমতি নেই")}
+ else if(status===401||/invalid_api_key/.test(d)){e.code="auth";e.userMsg=RAL("ElevenLabs rejected the API key","ElevenLabs API কী গ্রহণ করেনি")}
+ else if(/quota_exceeded/.test(d)){e.code="quota";e.userMsg=RAL("ElevenLabs credits are used up","ElevenLabs ক্রেডিট শেষ")}
+ else if(status===402||status===403||/paid_plan|plan/.test(d)){e.code="plan";e.userMsg=RAL("Your ElevenLabs plan can’t use this voice or model (library voices need a paid plan)","আপনার ElevenLabs প্ল্যানে এই ভয়েস/মডেল চলবে না (লাইব্রেরি ভয়েসের জন্য পেইড প্ল্যান লাগে)")}
+ else if(status===404||/voice_not_found/.test(d)){e.code="voice";e.userMsg=RAL("That voice isn’t in your ElevenLabs account. Add it to My Voices first","এই ভয়েসটি আপনার ElevenLabs অ্যাকাউন্টে নেই। আগে My Voices-এ যোগ করুন")}
+ else if(status===429){e.code="rate";e.userMsg=RAL("ElevenLabs is busy or rate-limited, try again shortly","ElevenLabs ব্যস্ত, একটু পরে চেষ্টা করুন")}
+ else if(status===422||status===400){e.code="bad";e.userMsg=RAL("ElevenLabs couldn’t process this text or model","ElevenLabs এই লেখা/মডেল প্রসেস করতে পারেনি")}
+ else{e.code="http";e.userMsg=RAL("ElevenLabs returned an error ("+status+")","ElevenLabs ত্রুটি দিয়েছে ("+status+")")}return e}
+async function elReq(path,opt){let r;try{r=await fetch(ELAPI+path,{...opt,headers:{"xi-api-key":EL.key,...(opt&&opt.headers)}})}catch(x){const e=new Error("net");e.code="net";e.userMsg=RAL("Can’t reach ElevenLabs (offline?)","ElevenLabs-এ পৌঁছানো যাচ্ছে না (অফলাইন?)");throw e}
+ if(!r.ok){let d="";try{const j=await r.json();d=JSON.stringify(j.detail||j)}catch(x){}throw elErr(r.status,d)}return r}
+function elVoiceId(){return/^[A-Za-z0-9]{8,40}$/.test(st.elVoice||"")?st.elVoice:""}
+function elAudio(text){const v=elVoiceId();if(!v){const e=new Error("novoice");e.code="novoice";e.userMsg=RAL("Choose an ElevenLabs voice in Settings → Read Aloud","Settings → Read Aloud-এ একটি ElevenLabs ভয়েস বাছুন");return Promise.reject(e)}
+ const m=elModel(),k=m+"|"+v+"|"+text;if(EL.cache.has(k))return EL.cache.get(k);
+ const p=(async()=>{const r=await elReq("/v1/text-to-speech/"+encodeURIComponent(v),{method:"POST",headers:{"Content-Type":"application/json",Accept:"audio/mpeg"},body:JSON.stringify({text:text,model_id:m})});return URL.createObjectURL(await r.blob())})();
+ EL.cache.set(k,p);p.catch(()=>EL.cache.delete(k));
+ while(EL.cache.size>8){const o=EL.cache.keys().next().value,pp=EL.cache.get(o);EL.cache.delete(o);pp.then(u=>{try{URL.revokeObjectURL(u)}catch(e){}},()=>{})}
+ return p}
+function elSplit(t,max){if(t.length<=max)return[t];const o=[];let s=t;while(s.length>max){let c=Math.max(s.lastIndexOf("। ",max),s.lastIndexOf(". ",max),s.lastIndexOf("? ",max),s.lastIndexOf("! ",max),s.lastIndexOf("؟ ",max));if(c<max*.4)c=s.lastIndexOf(" ",max);if(c<1)c=max;o.push(s.slice(0,c+1).trim());s=s.slice(c+1)}if(s.trim())o.push(s.trim());return o}
+function elUnlock(){try{if(!EL.a)EL.a=new Audio();if(EL.unl)return;EL.unl=1;const a=EL.a;a.src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";const p=a.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
+function elStop(){try{if(EL&&EL.a)EL.a.pause()}catch(e){}if(EL&&EL.res){const r=EL.res;EL.res=null;r()}}
+function elPlayUrl(url){return new Promise((resolve,reject)=>{const a=EL.a||(EL.a=new Audio());a.onended=a.onerror=null;a.src=url;a.playbackRate=raRate();EL.res=resolve;
+ a.onended=()=>{EL.res=null;resolve()};a.onerror=()=>{EL.res=null;reject(Object.assign(new Error("audio"),{code:"audio",userMsg:RAL("The audio couldn’t be played","অডিও চালানো যায়নি")}))};
+ const p=a.play();if(p&&p.catch)p.catch(e=>{EL.res=null;if(e&&e.name==="AbortError")resolve();else reject(e)})})}
+
+/* ---- reading loop (one request per paragraph, next paragraph prefetched) ---- */
+function elPre(i){const b=RA.blocks[i];if(!b)return;try{const t=raSegsOf(b).map(s=>s.t).join(" ").replace(/\s+/g," ").trim();if(t&&t.length<=elMax())elAudio(t).catch(()=>{})}catch(e){}}
+async function elStep(g){try{
+ for(let guard=0;guard<4000;guard++){
+  if(g!==RA.gen||!RA.on||RA.paused)return;
+  if(RA.k>=RA.segs.length){if(RA.i+1>=RA.blocks.length){raDone();return}if(!raEnter(RA.i+1))return;continue}
+  const txt=RA.segs.map(s=>s.t).join(" ").replace(/\s+/g," ").trim();if(!txt){RA.k=RA.segs.length;continue}
+  const parts=elSplit(txt,elMax());if(parts.length===1)elPre(RA.i+1);
+  for(let q=0;q<parts.length;q++){
+   const wait=setTimeout(()=>{if(g===RA.gen){RA.msg=RAL("Preparing voice…","ভয়েস তৈরি হচ্ছে…");raUi()}},500);
+   let u;try{u=await elAudio(parts[q])}finally{clearTimeout(wait);if(g===RA.gen&&RA.msg){RA.msg="";raUi()}}
+   if(g!==RA.gen)return;await elPlayUrl(u);if(g!==RA.gen)return}
+  RA.k=RA.segs.length;RA.fail=0;raUi()}
+ }catch(e){if(g!==RA.gen)return;elFail(e)}}
+function elFail(e){if(e&&e.name==="NotAllowedError"){raPause(RAL("Tap ▶ to start (the browser blocked auto-start)","শুরু করতে ▶ চাপুন"));return}
+ const m=(e&&e.userMsg)||RAL("ElevenLabs is unavailable","ElevenLabs পাওয়া যাচ্ছে না");toast(m);
+ const dev=!!(window.speechSynthesis&&window.SpeechSynthesisUtterance);
+ if(e&&(e.code==="novoice")){raPause(m);return}
+ if(!dev){raPause(m);return}
+ EL.fb=true;RA.msg=m+RAL(" Continuing with your device voice."," ডিভাইসের ভয়েসে চলছে।");RA.k=0;RA.busy=0;raUi();RA.t=setTimeout(raStep,80)}
+
+/* ---- voices ---- */
+async function elVoices(manual){if(!EL.key)return false;let all=[],tok="";try{
+  for(let n=0;n<6;n++){const r=await elReq("/v2/voices?page_size=100"+(tok?"&next_page_token="+encodeURIComponent(tok):""));const j=await r.json();all=all.concat(j.voices||[]);if(!j.has_more||!j.next_page_token)break;tok=j.next_page_token}}
+ catch(e){if(e.status===404||e.status===405){try{const r=await elReq("/v1/voices");all=(await r.json()).voices||[]}catch(e2){if(manual)toast(e2.userMsg||"Couldn’t load voices");return e2}}else{if(manual||e.code==="auth")toast(e.userMsg||"Couldn’t load voices");return e}}
+ EL.voices=all.filter(v=>v&&v.voice_id).map(v=>{const l=v.labels||{};return{id:v.voice_id,name:String(v.name||v.voice_id).slice(0,40),cat:v.category||"",d:[l.accent,l.gender,l.age,l.descriptive].filter(Boolean).join(", ").slice(0,40),pv:/^https:\/\//.test(v.preview_url||"")?v.preview_url:""}});
+ try{localStorage.setItem(ELV,JSON.stringify(EL.voices))}catch(e){}
+ if(!elVoiceId()&&EL.voices.length){const f=EL.voices[0];st.elVoice=f.id;st.elVoiceName=f.name;saveSt()}
+ if(manual)toast(EL.voices.length+RAL(" voices loaded"," টি ভয়েস পাওয়া গেছে"));return true}
+
+/* ---- settings actions ---- */
+function elRestart(){if(RA.on&&!RA.paused){raHalt();RA.t=setTimeout(raStep,80)}}
+function elRefresh(){raUi();if($(".stp"))openSettings(true)}
+async function elEngine(v){if(v==="eleven"&&!st.elConsent){if(!await askc(RAL("With ElevenLabs on, the text of the note you listen to is sent to ElevenLabs to create the audio. Your API key stays encrypted on this device. Continue?","ElevenLabs চালু থাকলে যে নোট শুনবেন তার লেখা অডিও তৈরির জন্য ElevenLabs-এ পাঠানো হবে। আপনার API কী এই ডিভাইসে এনক্রিপ্টেড থাকবে। চালিয়ে যাবেন?"),RAL("Continue","চালিয়ে যান")))return;st.elConsent=true}
+ st.raEngine=v==="eleven"?"eleven":"device";EL.fb=false;saveSt();elRestart();elRefresh()}
+async function elKeySave(){const i=$("#elk"),v=i?i.value.trim():"";if(!/^[A-Za-z0-9_\-]{20,200}$/.test(v)){toast(RAL("That doesn’t look like an ElevenLabs API key","এটি ElevenLabs API কী বলে মনে হচ্ছে না"));return}
+ EL.key=v;if(i)i.value="";const ok=await elPersist();if(!ok)toast(RAL("Couldn’t store the key securely here, so it is kept only until you close Nuvex","কীটি নিরাপদে সংরক্ষণ করা যায়নি, তাই Nuvex বন্ধ করা পর্যন্ত থাকবে"));
+ const r=await elVoices(false);if(r&&r.code==="auth"){EL.key="";await elPersist();toast(RAL("ElevenLabs rejected this key","ElevenLabs এই কী গ্রহণ করেনি"));elRefresh();return}
+ EL.fb=false;toast(RAL("ElevenLabs key saved","ElevenLabs কী সংরক্ষিত"));elRefresh()}
+async function elKeyDel(){if(!await askc(RAL("Remove the ElevenLabs key from this device?","এই ডিভাইস থেকে ElevenLabs কী মুছবেন?"),RAL("Remove","মুছুন")))return;EL.key="";await elPersist();EL.voices=[];try{localStorage.removeItem(ELV)}catch(e){}EL.cache.clear();elRestart();elRefresh()}
+function elSetVoice(id){id=String(id||"").trim();if(id&&!/^[A-Za-z0-9]{8,40}$/.test(id)){toast(RAL("That voice ID isn’t valid","ভয়েস আইডি সঠিক নয়"));return}const v=EL.voices.find(x=>x.id===id);st.elVoice=id;st.elVoiceName=v?v.name:"";saveSt();elRestart();elRefresh()}
+function elSetModel(m){st.elModel=m;saveSt();EL.cache.clear();elRestart();elRefresh()}
+async function elTest(){if(!EL.key)return;ixUnlockSafe();elUnlock();const bn=elMeta()[3],t=bn?"Hello, this is your Nuvex voice. আপনার নোট এভাবে পড়া হবে। مرحباً بكم.":"Hello, this is your Nuvex voice. مرحباً بكم.";
+ try{toast(RAL("Testing voice…","ভয়েস পরীক্ষা হচ্ছে…"));const u=await elAudio(t);elStop();await elPlayUrl(u)}catch(e){toast(e.userMsg||RAL("Test failed","পরীক্ষা ব্যর্থ"))}}
+function ixUnlockSafe(){try{if(typeof ixUnlock==="function")ixUnlock()}catch(e){}}
+function elPrevVoice(){const v=EL.voices.find(x=>x.id===st.elVoice);if(v&&v.pv){elUnlock();elStop();try{const a=EL.a||(EL.a=new Audio());a.onended=a.onerror=null;a.src=v.pv;a.playbackRate=1;const p=a.play();if(p&&p.catch)p.catch(()=>toast(RAL("Preview couldn’t play","প্রিভিউ চালানো যায়নি")))}catch(e){}}else elTest()}
+
+/* ---- UI rows (added to the existing Read Aloud settings card and the reader panel) ---- */
+const elVopt=()=>{const s=st.elVoice||"",L=EL.voices.slice();if(s&&!L.some(v=>v.id===s))L.unshift({id:s,name:st.elVoiceName||s,cat:"",d:""});
+ return(L.length?"":`<option value="">${RAL("No voices loaded","কোনো ভয়েস নেই")}</option>`)+L.map(v=>`<option value="${esc(v.id)}" ${v.id===s?"selected":""}>${esc(v.name)}${v.d?" · "+esc(v.d):v.cat?" · "+esc(v.cat):""}</option>`).join("")};
+function elRows(rw){const on=st.raEngine==="eleven",has=!!EL.key;
+ let h=rw("Voice engine","Device voices work offline. ElevenLabs gives natural voices in many languages and needs internet.",`<div class="seg"><button class="${on?"":"on"}" onclick="elEngine('device')">Device</button><button class="${on?"on":""}" onclick="elEngine('eleven')">ElevenLabs</button></div>`);
+ if(!on)return h;
+ h+=rw("ElevenLabs API key",has?"••••"+EL.key.slice(-4)+" · stored encrypted on this device, never in backups":"Paste the key from elevenlabs.io (Developers → API Keys). It stays on this device only.",
+  has?`<span class="flex" style="margin:0"><button class="btn alt" onclick="elTest()">Test</button><button class="btn alt" onclick="elKeyDel()">Remove</button></span>`:`<span class="flex" style="margin:0"><input id="elk" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="sk_…" style="width:150px"><button class="btn" onclick="elKeySave()">Save</button></span>`);
+ if(!has)return h;
+ h+=rw("ElevenLabs model","Only v3 and v4 read Bangla. All four read English and Arabic.",`<select onchange="elSetModel(this.value)" style="max-width:210px">${ELMODELS.map(m=>`<option value="${m[0]}" ${m[0]===elModel()?"selected":""}>${esc(m[1])}</option>`).join("")}</select>`);
+ h+=rw("ElevenLabs voice","Voices in your account. Voice-library voices must be added to My Voices first.",`<span class="flex" style="margin:0;flex-wrap:wrap;gap:6px"><select onchange="elSetVoice(this.value)" style="max-width:190px">${elVopt()}</select><button class="btn alt" onclick="elPrevVoice()">▶</button><button class="btn alt" onclick="elVoices(true).then(elRefresh)">↻</button></span>`);
+ h+=rw("Or paste a voice ID","Copy it from the voice in ElevenLabs",`<input id="elvi" value="" placeholder="${esc(st.elVoice||"voice id")}" style="width:170px" onchange="elSetVoice(this.value)">`);
+ return h}
+{const _rc=raCard;raCard=function(rw,tg,seg){let h=_rc.apply(this,arguments);try{return h.replace('<div class="scard">','<div class="scard">'+elRows(rw))}catch(e){return h}}}
+{const _rm=raMore;raMore=function(){_rm.apply(this,arguments);const m=$("#ra-more");if(!m||m.hidden)return;const on=st.raEngine==="eleven";
+ m.insertAdjacentHTML("afterbegin",`<div class="seg ra-sp"><button class="${on?"":"on"}" onclick="elEngine('device')">${RAL("Device voice","ডিভাইস ভয়েস")}</button><button class="${on?"on":""}" onclick="elEngine('eleven')">ElevenLabs</button></div>`+(on&&EL.key?`<label>${RAL("ElevenLabs voice","ElevenLabs ভয়েস")}<select onchange="elSetVoice(this.value)">${elVopt()}</select></label>`:on?`<small>${RAL("Add your API key in Settings → Read Aloud","Settings → Read Aloud-এ API কী দিন")}</small>`:""))}}
+{const _rn=raNote;raNote=function(){if(!ELON()){return _rn.apply(this,arguments)}let t=RA.msg||"";const bnTxt=RA.blocks.some(b=>/[ঀ-৿]/.test(b.over||(b.el&&b.el.textContent)||""));
+ if(!t&&bnTxt&&!elMeta()[3])t=RAL("The selected ElevenLabs model doesn’t read Bangla. Choose Eleven v3 or v4 in Settings.","নির্বাচিত ElevenLabs মডেল বাংলা পড়ে না। Settings-এ Eleven v3 বা v4 বাছুন।");const n=$("#ra-n");if(n){n.textContent=t;n.style.display=t?"":"none"}}}
+/* ---- hooks into the existing playback engine ---- */
+{const _rh=raHalt;raHalt=function(){_rh.apply(this,arguments);elStop()}}
+{const _rb=raBegin;raBegin=function(){EL.fb=false;if(ELON())elUnlock();return _rb.apply(this,arguments)}}
+{const _rt=raToggle;raToggle=function(){if(EL&&st.raEngine==="eleven"&&EL.key)elUnlock();return _rt.apply(this,arguments)}}
+{const _rr=raRestartSeg;raRestartSeg=function(){if(ELON()&&EL.a&&EL.res&&!RA.paused){EL.a.playbackRate=raRate();return}return _rr.apply(this,arguments)}}
+
+/* ===== NOTE ICONS + DRAG REORDER ===== */
+var icPend=null,icSt=null,icCache=new Map(),icTimer=0;
+const IC_SW=[["#d4543f","#fff"],["#3f7bd4","#fff"],["#2e9e6b","#fff"],["#e0a030","#fff"],["#8b5cf6","#fff"],["#ec4899","#fff"],["#0ea5a4","#fff"],["#f97316","#fff"],["#475569","#fff"],["#111827","#fff"],["#eef0ee","#222"],["#fff4d6","#222"]];
+const IC_TAGS="circle,ellipse,rect,line,polyline,polygon,path,g,lineargradient,radialgradient,stop,defs".split(",");
+const IC_ATT="viewbox,d,fill,stroke,stroke-width,stroke-linecap,stroke-linejoin,stroke-opacity,fill-opacity,opacity,fill-rule,clip-rule,cx,cy,r,rx,ry,x,y,x1,y1,x2,y2,width,height,points,transform,offset,stop-color,stop-opacity,id,gradientunits,gradienttransform,fx,fy,stroke-miterlimit,stroke-dasharray,stroke-dashoffset".split(",");
+const IC_BAD=/url\(\s*(?!#)|javascript|data:|<|expression|@import|&#/i;
+const icHash=s=>{let h=5381;for(let k=0;k<s.length;k++)h=((h<<5)+h+s.charCodeAt(k))|0;return(h>>>0).toString(36)};
+/* Strict SVG sanitiser: rebuilds the icon from an allow-list, so nothing executable can survive. */
+function icClean(src){
+ if(typeof src!=="string"||!src||src.length>40000)return null;
+ if(icCache.has(src))return icCache.get(src);
+ let out=null;
+ try{
+  const doc=new DOMParser().parseFromString(src,"image/svg+xml"),root=doc.documentElement;
+  if(!root||root.localName.toLowerCase()!=="svg"||doc.querySelector("parsererror"))throw 0;
+  const px="i"+icHash(src)+"_",NS="http://www.w3.org/2000/svg";let n=0;
+  const walk=(e,d)=>{
+   const tag=e.localName.toLowerCase();
+   if(d>12||(tag!=="svg"&&!IC_TAGS.includes(tag)))return null;
+   const o=document.createElementNS(NS,tag==="lineargradient"?"linearGradient":tag==="radialgradient"?"radialGradient":tag);
+   for(const a of e.attributes){
+    const nm=a.name.toLowerCase();
+    if(a.namespaceURI||!IC_ATT.includes(nm)||(tag==="svg"&&(nm==="width"||nm==="height"||nm==="id")))continue;
+    let v=a.value;if(IC_BAD.test(v)||v.length>6000)continue;
+    if(nm==="id")v=px+v;
+    v=v.replace(/url\(\s*#([^)]+)\)/g,(m,x)=>"url(#"+px+x.trim()+")");
+    o.setAttribute(a.name.replace(/^viewbox$/i,"viewBox").replace(/^gradientunits$/i,"gradientUnits").replace(/^gradienttransform$/i,"gradientTransform"),v)}
+   if(++n>600)throw 0;
+   for(const c of e.children){const k=walk(c,d+1);if(k)o.appendChild(k)}
+   return o};
+  const s=walk(root,0);
+  if(!s)throw 0;
+  if(!s.getAttribute("viewBox"))s.setAttribute("viewBox","0 0 24 24");
+  s.setAttribute("aria-hidden","true");s.setAttribute("focusable","false");
+  if(!s.querySelector("path,circle,rect,ellipse,line,polyline,polygon"))throw 0;
+  out=new XMLSerializer().serializeToString(s)}
+ catch(e){out=null}
+ if(icCache.size>400)icCache.clear();
+ icCache.set(src,out);return out}
+const icCol=(c,d)=>/^#[0-9a-f]{3,8}$/i.test(c||"")?c:d;
+function icTile(i,extra){
+ const c=i&&i.ic;
+ if(c&&c.v){const st=`background:${icCol(c.bg,"#3f7bd4")};color:${icCol(c.fg,"#fff")}`;
+  if(c.k==="e")return `<div class="kd ki em ${extra||""}" style="${st}">${esc(String(c.v).slice(0,8))}</div>`;
+  const s=icClean(c.v);if(s)return `<div class="kd ki ${extra||""}" style="${st}">${s}</div>`}
+ return `<div class="kd k-${i.kind} ${extra||""}">${KL[i.kind]}</div>`}
+/* ---- form field ---- */
+function icField(i){icPend=i&&i.ic&&i.ic.v?i.ic:null;
+ return `<div class="icf"><button type="button" class="icb" id="icf-t" onclick="icOpen()" title="Choose an icon">${icFieldTile()}</button><div class="icm"><b>Icon</b><span class="meta">Pick from a library of 200,000+ icons, emoji, or create one with AI</span></div><button type="button" class="btn alt" onclick="icOpen()">Choose</button></div>`}
+function icFieldTile(){const k=editId?(items.find(x=>x.id===editId)||{}).kind:(typeof fk!=="undefined"?fk:"text");return icTile({ic:icPend,kind:k||"text"})}
+function icFieldPaint(){const b=$("#icf-t");if(b)b.innerHTML=icFieldTile()}
+/* ---- picker ---- */
+const IC_EM={"Study":"📚 📖 📓 📔 📒 📝 ✏️ 🖊️ 🖋️ 🖍️ 📐 📏 🧮 🎓 🏫 📅 🗂️ 📌 📎 🔖 🗒️ 🧠 💡 🔍 🎯 🏆 ⏰ 📊 📈 🗺️ 🌍","Science":"🔬 🧪 ⚗️ 🧫 🧬 ⚛️ 🔭 🌡️ 💊 🩺 🦠 🧲 ⚡ 🔋 💻 🖥️ 🤖 🛰️ 🚀 🔥 💧 ❄️ ☀️ 🌙 ⭐ 🪐 🌋 ⚙️ 🔧 🔩 📡","Nature":"🌸 🌹 🌺 🌻 🌼 🌷 🪻 💐 🌱 🌿 🍀 🌳 🌴 🌵 🍁 🍂 🍃 🍄 🌾 🦋 🐝 🐞 🐦 🕊️ 🦚 🐟 🐬 🐢 🌈 ☁️ ⛰️","Hearts":"❤️ 🧡 💛 💚 💙 💜 🖤 🤍 🤎 💖 💗 💓 💞 💕 💘 💝 💍 💒 👰 🤵 💑 🌹 🎀 🎁 🥂 💌 😍 🥰 😊 ✨ 🌟","Faces":"😀 😃 😄 😁 😆 😅 😂 🙂 😉 😊 😇 🥰 😍 🤩 😎 🤓 🧐 🤔 😴 😭 😤 😡 🥳 🤯 😱 🙏 👍 👏 💪 🤝 ✌️","Food":"🍎 🍊 🍋 🍌 🍉 🍇 🍓 🍒 🥭 🍍 🥥 🥕 🌽 🍅 🥔 🍞 🧀 🍳 🍔 🍕 🍜 🍚 🍛 🍰 🍪 🍫 🍦 ☕ 🍵 🥤","Places":"🏠 🏡 🏢 🏫 🏥 🕌 ⛪ 🕍 🏛️ 🗼 🌉 ⛺ 🏖️ 🏝️ 🚗 🚌 🚆 ✈️ 🚢 🚲 🛵 🗺️ 🧭 📍 🌅 🌃 🎡 🎪 🏟️ ⛲","Objects":"📱 ☎️ 📷 🎥 🎧 🎤 🎵 🎶 🎸 🎹 🎨 🖌️ 🎭 🎬 🎮 🧩 ♟️ ⚽ 🏀 🏏 🎲 🧸 🔑 🔒 💼 👑 💎 🛒 🧳 ☂️","Symbols":"✅ ❌ ⭕ ❗ ❓ ⚠️ ➕ ➖ ✖️ ➗ ♾️ 💯 🔔 🔕 🚩 🏁 🔴 🟠 🟡 🟢 🔵 🟣 ⚫ ⚪ 🔶 🔷 ♠️ ♥️ ♦️ ♣️ 🔰"};
+const IC_Q=["book","flower","heart","atom","flask","math","brain","pen","star","leaf","calculator","globe","music","rocket","lightbulb","history","code","chemistry","biology","physics"];
+const IC_SETS=[["","All sets"],["mdi","Material"],["lucide","Lucide"],["tabler","Tabler"],["ph","Phosphor"],["solar","Solar"],["fluent-emoji-flat","Fluent Emoji"],["noto","Noto"],["twemoji","Twemoji"]];
+function icOpen(){
+ icSt={tab:"lib",sel:icPend?{...icPend}:null,q:"",pfx:"",res:[],busy:0,ai:[],err:"",cat:"Study"};
+ const d=document.createElement("div");d.className="ov cf";d.id="icp";
+ d.innerHTML=`<div class="box icbox" role="dialog" aria-label="Choose an icon"><header><b>Choose an icon</b><button class="btn alt" onclick="icClose()">Cancel</button></header><div class="cnt"><div id="ic-body"></div></div><footer class="icfoot"><div id="ic-prev"></div><div class="icsw" id="ic-sw"></div><div class="flex" style="margin:0"><button class="btn alt" onclick="icUse(null)">Remove</button><button class="btn" id="ic-ok" onclick="icUse(icSt.sel)">Use icon</button></div></footer></div>`;
+ d.addEventListener("click",e=>{if(e.target===d)icClose()});
+ document.body.appendChild(d);icDraw();icPrev();icSearch()}
+function icClose(){clearTimeout(icTimer);const d=$("#icp");if(d)d.remove();icSt=null}
+function icUse(v){icPend=v&&v.v?v:null;icFieldPaint();icClose()}
+function icPrev(){
+ const sel=icSt.sel,k=editId?(items.find(x=>x.id===editId)||{}).kind:"text";
+ $("#ic-prev").innerHTML=icTile({ic:sel,kind:k||"text"});
+ $("#ic-sw").innerHTML=IC_SW.map((c,n)=>`<button type="button" class="sw ${sel&&sel.bg===c[0]?"on":""}" style="background:${c[0]}" aria-label="Colour ${n+1}" onclick="icCol_(${n})"></button>`).join("");
+ $("#ic-ok").disabled=!sel}
+function icCol_(n){if(!icSt.sel)return;icSt.sel.bg=IC_SW[n][0];icSt.sel.fg=IC_SW[n][1];icPrev()}
+function icPick(v){const c=IC_SW[icSt.sel?IC_SW.findIndex(x=>x[0]===icSt.sel.bg):0]||IC_SW[1];icSt.sel={k:v.k,v:v.v,bg:(icSt.sel&&icSt.sel.bg)||c[0],fg:(icSt.sel&&icSt.sel.fg)||c[1]};icPrev()}
+function icTab(t){icSt.tab=t;icSt.err="";icDraw();if(t==="lib"&&!icSt.res.length)icSearch()}
+function icDraw(){
+ const s=icSt,tabs=[["lib","Library"],["emo","Emoji"],["ai","AI generate"]];
+ let h=`<div class="flex" style="margin-top:0">${tabs.map(t=>`<button class="chip ${s.tab===t[0]?"on":""}" onclick="icTab('${t[0]}')">${t[1]}</button>`).join("")}</div>`;
+ if(s.tab==="lib"){
+  h+=`<input id="ic-q" type="search" placeholder="Search 200,000+ icons… (English words work best)" value="${esc(s.q)}" oninput="icQ(this.value)" autocomplete="off"><div class="flex icsets">${IC_SETS.map(x=>`<button class="chip ${s.pfx===x[0]?"on":""}" onclick="icSet('${x[0]}')">${x[1]}</button>`).join("")}</div><div class="flex icsets">${IC_Q.map(q=>`<button class="chip" onclick="icKw('${q}')">${q}</button>`).join("")}</div><div id="ic-res"></div><p class="meta" style="margin:8px 2px 0">Icons come from the open Iconify library over the internet. Once you pick one it is saved inside your note and works offline.</p>`}
+ else if(s.tab==="emo"){
+  h+=`<div class="flex icsets">${Object.keys(IC_EM).map(c=>`<button class="chip ${s.cat===c?"on":""}" onclick="icSt.cat='${c}';icDraw()">${c}</button>`).join("")}</div><div class="icg">${IC_EM[s.cat].split(" ").map(e=>`<button type="button" class="${s.sel&&s.sel.k==="e"&&s.sel.v===e?"on":""}" onclick="icPick({k:'e',v:'${e}'})"><span class="emo">${e}</span></button>`).join("")}</div><p class="meta" style="margin:8px 2px 0">Emoji work fully offline.</p>`}
+ else{
+  const t=editId?((items.find(x=>x.id===editId)||{}).title||""):($("#e-t")&&$("#e-t").value)||($("#f-t")&&$("#f-t").value)||"";
+  h+=`<label class="l" style="margin-top:6px">Describe the icon</label><input id="ic-ai" placeholder="e.g. a blooming rose, a DNA helix, a graduation cap" value="${esc(s.aiq!==undefined?s.aiq:t)}" oninput="icSt.aiq=this.value"><div class="flex"><select id="ic-ais" onchange="icSt.ais=this.value">${[["line","Simple line icon"],["flat","Colourful flat icon"]].map(o=>`<option value="${o[0]}" ${s.ais===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select><button class="btn" id="ic-gen" onclick="icGen()" ${s.busy?"disabled":""}>${s.busy?"Generating…":s.ai.length?"Generate again":"Generate with AI"}</button></div><p class="meta" style="margin:4px 2px 8px">Only the short description above is sent to your AI provider. Your note text is never sent.</p><div class="meta" style="color:var(--dan)">${esc(s.err)}</div><div class="icg ai">${s.ai.map((v,n)=>`<button type="button" class="${s.sel&&s.sel.v===v?"on":""}" onclick="icPick({k:'s',v:icSt.ai[${n}]})"><span class="sv">${icClean(v)||""}</span></button>`).join("")}</div>`}
+ $("#ic-body").innerHTML=h;if(s.tab==="lib")icResDraw()}
+function icQ(v){icSt.q=v;clearTimeout(icTimer);icTimer=setTimeout(icSearch,380)}
+function icKw(w){icSt.q=w;const e=$("#ic-q");if(e)e.value=w;icSearch()}
+function icSet(p){icSt.pfx=p;icDraw();icSearch()}
+async function icSearch(){
+ const s=icSt;if(!s)return;const q=(s.q||"").trim()||"book",my=s.tk=(s.tk||0)+1;s.busy=1;s.err="";icResDraw();
+ try{const r=await fetch("https://api.iconify.design/search?query="+encodeURIComponent(q)+"&limit=96"+(s.pfx?"&prefix="+encodeURIComponent(s.pfx):""));
+  if(!r.ok)throw 0;const j=await r.json();if(icSt!==s||s.tk!==my)return;
+  s.res=(j.icons||[]).filter(x=>/^[a-z0-9-]+:[a-z0-9-]+$/.test(x));s.total=j.total||s.res.length}
+ catch(e){if(icSt!==s||s.tk!==my)return;s.res=[];s.err="Couldn’t reach the online library. Check your internet, or use the Emoji tab, which works offline."}
+ s.busy=0;icResDraw()}
+function icResDraw(){const e=$("#ic-res"),s=icSt;if(!e||!s)return;
+ e.innerHTML=s.busy?'<p class="meta">Searching…</p>':s.err?`<p class="meta" style="color:var(--dan)">${esc(s.err)}</p>`:s.res.length?`<div class="icg">${s.res.map(n=>{const[p,m]=n.split(":");return `<button type="button" title="${esc(n)}" class="${s.sel&&s.sel.src===n?"on":""}" onclick="icLib('${n}')"><img loading="lazy" alt="${esc(m)}" src="https://api.iconify.design/${p}/${m}.svg"></button>`}).join("")}</div>`:'<p class="meta">No icons found. Try another word.</p>'}
+async function icLib(n){
+ const[p,m]=n.split(":"),s=icSt;
+ try{const r=await fetch(`https://api.iconify.design/${p}/${m}.svg`);if(!r.ok)throw 0;const t=await r.text(),c=icClean(t);if(!c)throw 0;if(icSt!==s)return;icPick({k:"s",v:c});icSt.sel.src=n;icResDraw()}
+ catch(e){toast("Couldn’t load that icon")}}
+async function icGen(){
+ const s=icSt,q=($("#ic-ai").value||"").trim().slice(0,120);if(!q){s.err="Describe the icon first.";return icDraw()}
+ s.aiq=q;s.busy=1;s.err="";icDraw();
+ try{const sm=await nxSample();if(!sm)throw{message:"AI isn’t set up. Add your Gemini key in Settings > AI assistant."};
+  const flat=s.ais==="flat";
+  const pr=`Design ONE small, clean, recognisable icon of: "${q.replace(/"/g,"'")}".\nReturn ONLY raw SVG markup, nothing else (no markdown fences, no explanation).\nRules: viewBox="0 0 24 24"; use only <svg>, <g>, <path>, <circle>, <ellipse>, <rect>, <line>, <polyline>, <polygon>; no text, no images, no scripts, no filters, no external references; ${flat?'flat colourful style with 2 to 4 solid fill colours as hex values':'single-colour line style: fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"'}; keep the drawing centred with about 2px of padding; keep it simple, under 25 shapes.`;
+  const r=await sm([{role:"user",content:pr}],{modelTier:"quick",cache:false});
+  const m=String(r&&r.text||"").match(/<svg[\s\S]*?<\/svg>/i),c=m&&icClean(m[0].replace(/<\?xml[^>]*>/,""));
+  if(icSt!==s)return;
+  if(!c)throw{message:"The AI didn’t return a usable icon. Try again or rephrase."};
+  s.ai.unshift(c);s.ai=s.ai.slice(0,9);icPick({k:"s",v:c})}
+ catch(e){if(icSt!==s)return;s.err=(e&&e.message)||"Couldn’t generate an icon."}
+ s.busy=0;icDraw()}
+/* ===== drag to reorder (Spotify-style 3-dot handle) ===== */
+const IC_DOTS='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="19" r="1.9"/></svg>';
+const dhOn=()=>!!view&&!($("#q")&&$("#q").value.trim());
+function dhBtn(i){return dhOn()?`<button type="button" class="dh" title="Drag to reorder" aria-label="Reorder: press and drag, or use the up and down arrow keys" onclick="event.stopPropagation()" onpointerdown="dhStart(event,'${i.id}')" onkeydown="dhKey(event,'${i.id}')" oncontextmenu="return false">${IC_DOTS}</button>`:""}
+var DH=null;
+function dhRows(r){const o=[];let e=r.previousElementSibling;while(e&&e.classList.contains("row"))e=e.previousElementSibling;e=e?e.nextElementSibling:r.parentNode.firstElementChild;while(e&&e.classList.contains("row")){o.push(e);e=e.nextElementSibling}return o}
+function dhStart(ev,id){
+ if(DH||(ev.button!==undefined&&ev.button>0))return;
+ const h=ev.currentTarget,r=h.closest(".row");if(!r)return;ev.preventDefault();ev.stopPropagation();
+ try{h.setPointerCapture(ev.pointerId)}catch(e){}
+ const b=r.getBoundingClientRect();
+ DH={r,h,pid:ev.pointerId,off:ev.clientY-b.top,y:ev.clientY,raf:0};
+ r.classList.add("dragging");document.body.classList.add("dragging-r");
+ h.addEventListener("pointermove",dhMove);h.addEventListener("pointerup",dhEnd);h.addEventListener("pointercancel",dhEnd);
+ dhLoop()}
+function dhMove(e){if(DH&&e.pointerId===DH.pid)DH.y=e.clientY}
+function dhLoop(){
+ if(!DH)return;const{r}=DH;
+ const vh=innerHeight,y=DH.y;let sc=0;
+ if(y<80)sc=-Math.ceil((80-y)/6);else if(y>vh-80)sc=Math.ceil((y-(vh-80))/6);
+ if(sc){const before=scrollY;scrollBy(0,sc);if(scrollY!==before)DH.off+=0}
+ r.style.transform="";const nat=r.getBoundingClientRect(),want=DH.y-DH.off;
+ const ctr=want+nat.height/2;
+ let pv=r.previousElementSibling,nx=r.nextElementSibling;
+ if(pv&&pv.classList.contains("row")){const q=pv.getBoundingClientRect();if(ctr<q.top+q.height/2){r.parentNode.insertBefore(r,pv)}}
+ else if(nx&&nx.classList.contains("row")){const q=nx.getBoundingClientRect();if(ctr>q.top+q.height/2){r.parentNode.insertBefore(r,nx.nextElementSibling)}}
+ if(nx&&nx.classList.contains("row")&&r.nextElementSibling===nx){const q=nx.getBoundingClientRect();if(ctr>q.top+q.height/2)r.parentNode.insertBefore(r,nx.nextElementSibling)}
+ const n2=r.getBoundingClientRect();r.style.transform=`translateY(${want-n2.top}px)`;
+ DH.raf=requestAnimationFrame(dhLoop)}
+async function dhEnd(e){
+ if(!DH||(e&&e.pointerId!==DH.pid))return;
+ const{r,h}=DH;cancelAnimationFrame(DH.raf);
+ h.removeEventListener("pointermove",dhMove);h.removeEventListener("pointerup",dhEnd);h.removeEventListener("pointercancel",dhEnd);
+ try{h.releasePointerCapture(DH.pid)}catch(x){}
+ r.style.transform="";r.classList.remove("dragging");document.body.classList.remove("dragging-r");DH=null;
+ await dhSave(r)}
+async function dhSave(r){
+ const ids=dhRows(r).map(x=>x.dataset.id),want=ids.map(id=>items.find(x=>x.id===id)).filter(Boolean);
+ if(want.length<1)return;
+ const ch=[];want.forEach((it,n)=>{if(it.ord!==n+1)ch.push([it,n+1])});
+ if(sort!=="custom"){sort="custom";st.sort="custom";saveSt()}
+ try{for(const[it,o]of ch)await S.patch(it,{ord:o})}catch(e){toast("Couldn’t save the order")}
+ if(!S.cloud)try{await refresh()}catch(e){}else render();
+ if(ch.length)toast("Order saved")}
+async function dhKey(e,id){
+ if(e.key!=="ArrowUp"&&e.key!=="ArrowDown")return;e.preventDefault();e.stopPropagation();
+ const r=e.currentTarget.closest(".row");if(!r)return;
+ const sib=e.key==="ArrowUp"?r.previousElementSibling:r.nextElementSibling;
+ if(!sib||!sib.classList.contains("row"))return;
+ e.key==="ArrowUp"?r.parentNode.insertBefore(r,sib):r.parentNode.insertBefore(sib,r);
+ await dhSave(r);const nb=document.querySelector(`.row[data-id="${id}"] .dh`);if(nb)nb.focus()}
 
 /*AIHUB-START*/
 (function(){"use strict";
@@ -3812,6 +4254,39 @@ svg foreignObject{overflow:visible}.nxd foreignObject .nxfd{display:block;width:
 .nxfbar{height:6px;border-radius:4px;background:var(--line);overflow:hidden}.nxfbar i{display:block;height:100%;background:var(--a2);width:0;transition:width .12s}
 .nxfsum{display:flex;flex-direction:column;gap:2px;margin:2px 0 10px}.nxfchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
 .nxfi .nxqh{flex-wrap:wrap}
+</style>
+<style id="nx-box2-css">
+.nxdef,.nxnote{margin:14px 0;padding:10px 16px 4px;border:1px solid var(--line);border-left:4px solid #8e5cf0;border-radius:14px;background:var(--c2);text-align:left}
+.nxnote{border-left-color:var(--gold)}
+.nxdef .nxah{color:#8e5cf0}.nxnote .nxah{color:var(--gold)}
+.nxdef .nxab>:first-child,.nxnote .nxab>:first-child{margin-top:0}.nxdef .nxab>:last-child,.nxnote .nxab>:last-child{margin-bottom:6px}
+.nxfl .nxfh{font-weight:700;margin:0 0 10px;text-align:left}
+.nxfl .nxcb{font-weight:500}
+.nxcl .nxcb{font-weight:600}
+.nxmd{margin:14px 0}
+.nxmr{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.nxmr:last-child{border-bottom:0}
+.nxmr>.nxi,.nxmr>.nxg{flex:0 0 clamp(96px,30%,170px);width:clamp(96px,30%,170px);margin:0}
+.nxmr>.nxg{display:block;overflow:visible;padding:0}
+.nxmr .nxg>*{max-width:100%}
+.nxmr .nxf img{width:100%;max-height:none;aspect-ratio:1/1;object-fit:cover;border-radius:16px}
+.nxmr .nxf figcaption{display:none}
+.nxmr .nxc{max-width:none;font-size:12px}
+.nxmb{flex:1;min-width:0;text-align:left}
+.nxmt{font-weight:700;font-size:1.05em;margin:0 0 6px}
+.nxmb p{margin:0 0 .6em}.nxmb>:last-child{margin-bottom:0}
+</style>
+<style id="nx-box-css">
+.nxans{margin:14px 0;padding:12px 16px 6px;border:1.5px solid var(--a1);border-radius:14px;background:var(--card);text-align:left}
+.nxah{font-weight:700;font-size:1.02em;margin:0 0 8px;color:var(--ink)}
+.nxab>:first-child{margin-top:0}.nxab>:last-child{margin-bottom:6px}
+.nxab p{margin:0 0 .7em}
+.nxcp{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--c2);text-align:center}
+.nxcb{border-radius:10px;padding:12px 10px;font-weight:600;line-height:1.5;color:var(--ink);background:var(--card);border:1px solid var(--line)}
+.nxcb{background:color-mix(in srgb,var(--a1) 9%,var(--card));border-color:color-mix(in srgb,var(--a1) 28%,var(--line))}
+.nxcb.p{background:color-mix(in srgb,var(--a1) 18%,var(--card));font-size:1.04em}
+.nxcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.nxcar{color:var(--mut);line-height:1.5;font-size:1.15em;padding:4px 0}
 </style>
 <style id="nx-aifix-css">
 #ai .aim,#ai .bb{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
